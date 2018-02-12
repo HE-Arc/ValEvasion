@@ -1,2 +1,2 @@
-# ValEvasion
-Projet pour un site d'agence de voyage 
+# Val Evasion
+Project for a travel agency website
