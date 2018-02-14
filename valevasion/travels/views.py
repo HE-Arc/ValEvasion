@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+
 from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the Travels index.")
+    context = {}
+    return render(request, 'travels/index.html', context)

@@ -1,0 +1,91 @@
+{% extends 'travels/base_site.html' %}
+{% load staticfiles %}
+
+{% block title %}ValEvasion - home{% endblock %}
+
+{% block content %} 
+<!-- Page Contents -->
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a class="active item">Home</a>
+        <a class="item">Nos voyages</a>
+        <a class="item">Galerie photos</a>
+        <a class="item">Nous contacter</a>
+        <div class="right item">
+          <a class="ui inverted button">Log in</a>
+          <a class="ui inverted button">Sign Up</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        ValEvasion
+      </h1>
+      <h2>Votre agence de voyage!</h2>
+      <div class="ui huge primary button">Voir les voyages <i class="right arrow icon"></i></div>
+    </div>
+
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">Un voyage qui vous correspond !</h3>
+          <p>Nous efforçons de trouver les meilleurs voyage avec les meilleurs prix!</p>
+          <h3 class="ui header">Nous nous occupons de tout !</h3>
+          <p>Reservation du billet d'avion, reservation de l'hôtel et transport jusqu'à votre hôtel !</p>
+        </div>
+        <div class="six wide right floated column">
+          <img src="assets/images/wireframe/white-image.png" class="ui large bordered rounded image">
+        </div>
+      </div>
+      <div class="row">
+        <div class="center aligned column">
+          <a class="ui huge button">Voir nos offres de voyages</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>"Incroyable expérience !!"</h3>
+          <p>Ce qui se dit à propos de nous !</p>
+        </div>
+        <div class="column">
+          <h3>"Excelente agence de voyage"</h3>
+          <p>
+            <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+      <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
+      <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
+      <a class="ui large button">Read More</a>
+      <h4 class="ui horizontal header divider">
+        <a href="#">Case Studies</a>
+      </h4>
+      <h3 class="ui header">Partagez votre experience avec d'autre personne</h3>
+      <p>Vous pouvez partager vos photos ou tout simplement laisser un commentaire sur votre expérience durant votre voyage</p>
+      <a class="ui large button">Je veux partager mon expérience !</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -108,4 +108,4 @@ venv.bak/
 # secret config
 valevasion/secret_config.py
 
-idea/*
+.idea/*
