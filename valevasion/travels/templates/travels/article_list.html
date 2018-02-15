@@ -1,0 +1,48 @@
+{% extends 'travels/base_site.html' %}
+
+{% block title %}Nos Voyages{% endblock %}
+
+{% block content %} 
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+
+      <h1 class="display-4">Nos voyages</h1>
+      <p class="lead text-muted">Une liste de nos merveilleux voyages.</p>
+      <hr/>
+
+      <table class="table table-bordered mt-5">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Prix</th>
+          </tr>
+        </thead>
+
+      {% for article in article_list %}
+
+      <tr>
+        <td>
+          {{ article.title }}
+        </td>
+        <td>
+          {{ article.image }}
+        </td>
+        <td>
+          {{ article.description }}
+        </td>
+        <td>
+          {{ article.price }}
+        </td>
+        <td>
+          <a href="{% url 'article-detail' article.id %}" class="btn btn-primary btn-sm">Détails</a>
+        </td>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
