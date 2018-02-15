@@ -1,7 +1,8 @@
 from django.urls import path
 
-from . import views
+from .views import ArticleCreate, IndexView
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', IndexView.as_view(), name='index'),
+    path('create', ArticleCreate.as_view(), name="article-create"),
 ]
