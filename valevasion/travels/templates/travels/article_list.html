@@ -1,0 +1,41 @@
+{% extends 'travels/base_site.html' %}
+
+{% block title %}Nos Voyages{% endblock %}
+
+{% block content %}
+    <div class="ui special cards">
+        {% for article in article_list %}
+            <div class="card" href="{% url 'article-detail' article.id %}">
+                <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                        <div class="content">
+                            <div class="center">
+                                <div class="ui inverted button">Plus de détails</div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ MEDIA_URL }}/{{ article.image }}">
+                </div>
+                <div class="content">
+                    <a class="header">{{ article.title }}</a>
+                    <div class="meta">
+                        <span class="date">Poster le {{ article.pub_date.date }}</span>
+                    </div>
+                    <div class="description">
+                        <p>{{ article.description }}</p>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                        <i class="tags icon"></i>
+                        {% for tag in article.tags.all %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Pas de voyage pour le moment</p>
+        {% endfor %}
+    </div>
+{% endblock %}

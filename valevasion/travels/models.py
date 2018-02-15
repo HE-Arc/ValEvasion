@@ -13,12 +13,13 @@ class Tag(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
+    price = models.IntegerField()
     description = models.TextField()
     country = models.CharField(max_length=50)
     image = models.ImageField()
     pub_date = models.DateTimeField('date published')
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name='articles')
 
     def __str__(self):
         return self.title
@@ -37,6 +38,5 @@ class Comment(models.Model):
         return self.body
 
     class Meta:
-        ordering = ('pub_date',)
-
+        ordering = ('body',)
 

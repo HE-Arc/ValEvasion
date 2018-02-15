@@ -1,0 +1,40 @@
+{% extends 'travels/base_site.html' %}
+
+{% block title %}Details | {{ article.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4">{{ article.name }}</h1>
+      <p>{{ article.description }}</p>
+
+      <hr/>
+
+      <h3>Statistics</h3>
+
+      <div class="card-deck">
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Prix</h5>
+            <p class="display-2">{{ article.price }}</p>
+          </div>
+        </div>
+        <div class="card text-white bg-danger mr-3 mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Image</h5>
+            <p class="display-2">{{ article.image }}</p>
+          </div>
+        </div>
+        <div class="card text-white bg-primary mr-3 mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Mot-clé</h5>
+            <p class="display-2">{{ article.tags.name }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

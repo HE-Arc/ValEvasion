@@ -1,21 +1,22 @@
-from django.views import generic
+from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic import CreateView
+from django.views import generic
 
 from .models import Article
 
 
-class IndexView(generic.ListView):
+class ArticleIndexView(generic.ListView):
     model = Article
-    template_name = 'travels/index.html'
-    context_object_name = 'latest_travel_list'
 
     def get_queryset(self):
-        """Return the last five travel"""
-        return Article.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        # TODO improve this query with pagination !
+        return Article.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date').prefetch_related('tags').all()
 
 
-class ArticleCreate(CreateView):
+class ArticleDetailView(generic.DetailView):
     model = Article
-    fields = ['title', 'description', 'country', 'pub_date', 'image', 'tags']
 
+
+def index(request):
+    context = {}
+    return render(request, 'travels/index.html', context)
