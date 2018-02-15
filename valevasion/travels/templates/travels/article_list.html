@@ -1,4 +1,5 @@
 {% extends 'travels/base_site.html' %}
+{% load static %}
 
 {% block title %}Nos Voyages{% endblock %}
 
@@ -29,7 +30,7 @@
           {{ article.title }}
         </td>
         <td>
-          {{ article.image }}
+          <img src="media/{{ article.image }}" alt="My image"/>
         </td>
         <td>
           {{ article.description }}

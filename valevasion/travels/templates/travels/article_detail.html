@@ -1,17 +1,15 @@
 {% extends 'travels/base_site.html' %}
 
-{% block title %}Details | {{ article.name }}{% endblock %}
+{% block title %}Details | {{ article.title }}{% endblock %}
 
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1 class="display-4">{{ article.name }}</h1>
+      <h1 class="display-4">{{ article.title }}</h1>
       <p>{{ article.description }}</p>
 
       <hr/>
-
-      <h3>Statistics</h3>
 
       <div class="card-deck">
         <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
@@ -23,7 +21,7 @@
         <div class="card text-white bg-danger mr-3 mb-3" style="max-width: 18rem;">
           <div class="card-body">
             <h5 class="card-title">Image</h5>
-            <p class="display-2">{{ article.image }}</p>
+            <img src="{{ MEDIA_URL }}{{ article.image }}" alt="My image"/>
           </div>
         </div>
         <div class="card text-white bg-primary mr-3 mb-3" style="max-width: 18rem;">
