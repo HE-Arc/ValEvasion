@@ -26,6 +26,8 @@
       "description": "some description",
       "country": "Maroc",
       "image": "maroc.png",
+      "pub_date": "2018-02-14 10:41:00",
+      "update": "2018-02-15 10:41:00",
       "tags": "1"
     }
   },
@@ -39,6 +41,8 @@
       "description": "some description",
       "country": "Bénin",
       "image": "benin.png",
+      "pub_date": "2018-02-15 10:41:00",
+      "update": "2018-02-16 10:41:00",
       "tags": "2"
     }
   }
