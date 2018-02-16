@@ -3,6 +3,7 @@ behave-django==1.1.0
 Django==2.0.2
 django-appconf==1.0.2
 django-bootstrap-form==3.3
+django-countries==5.1.1
 django-debug-toolbar==1.9.1
 django-filebrowser-no-grappelli==3.7.4
 django-generate-secret-key==1.0.2

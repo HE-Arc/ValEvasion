@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce import models as tinymce_models
+from django_countries.fields import CountryField
 
 
 class Tag(models.Model):
@@ -16,7 +17,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     price = models.IntegerField()
     description = tinymce_models.HTMLField()
-    country = models.CharField(max_length=50)
+    country = CountryField()
     image = models.ImageField()
     pub_date = models.DateTimeField('date published')
     update = models.DateTimeField(auto_now=True, auto_now_add=False)

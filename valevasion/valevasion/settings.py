@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'tinymce',
     'filebrowser',
+    'django_countries',
     'django.contrib.admin',
 ]
 
