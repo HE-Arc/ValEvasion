@@ -1,0 +1,49 @@
+[
+  {
+    "model": "travels.tag",
+    "pk": 1,
+    "fields": {
+      "name": "tag 1"
+    }
+
+  },
+
+  {
+    "model": "travels.tag",
+    "pk": 2,
+    "fields": {
+      "name": "tag 2"
+    }
+
+  },
+
+  {
+    "model" : "travels.article",
+    "pk": 1,
+    "fields": {
+      "title": "Voyage au maroc",
+      "price": 1000,
+      "description": "some description",
+      "country": "Maroc",
+      "image": "maroc.png",
+      "pub_date": "2018-02-14 10:41:00",
+      "update": "2018-02-15 10:41:00",
+      "tags": "1"
+    }
+  },
+
+  {
+    "model" : "travels.article",
+    "pk": 2,
+    "fields": {
+      "title": "Voyage au bénin",
+      "price": 2000,
+      "description": "some description",
+      "country": "Bénin",
+      "image": "benin.png",
+      "pub_date": "2018-02-15 10:41:00",
+      "update": "2018-02-16 10:41:00",
+      "tags": "2"
+    }
+  }
+]
