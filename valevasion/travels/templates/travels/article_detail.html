@@ -1,40 +1,80 @@
 {% extends 'travels/base_site.html' %}
 
-{% block title %}Details | {{ article.name }}{% endblock %}
+{% block title %}Details | {{ article.title }}{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1 class="display-4">{{ article.name }}</h1>
-      <p>{{ article.description }}</p>
 
-      <hr/>
-
-      <h3>Statistics</h3>
-
-      <div class="card-deck">
-        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Prix</h5>
-            <p class="display-2">{{ article.price }}</p>
-          </div>
-        </div>
-        <div class="card text-white bg-danger mr-3 mb-3" style="max-width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Image</h5>
-            <p class="display-2">{{ article.image }}</p>
-          </div>
-        </div>
-        <div class="card text-white bg-primary mr-3 mb-3" style="max-width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Mot-clé</h5>
-            <p class="display-2">{{ article.tags.name }}</p>
-          </div>
-        </div>
-      </div>
-
+    <div class="ui one cards">
+        <a class=" black card">
+            <div class="image">
+                <img class="ui fluid image" src="{{ MEDIA_URL }}{{ article.image }}">
+            </div>
+        </a>
     </div>
-  </div>
-</div>
+
+    <h1 class="ui center aligned header">
+        {{ article.title }} <br>
+        <a href="#" class="ui primary button">Je veux réserver !</a>
+    </h1>
+
+
+    <div class="ui section divider"></div>
+    <h3 class="ui center aligned icon header">
+        <i class="circular plane icon"></i>
+    </h3>
+    <h3 class="ui header center aligned">Desciptions détailées de votre voyage !</h3>
+
+    <p>{{ article.description }} | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci commodi dolor
+        eveniet impedit itaque omnis quae rem saepe! Accusamus blanditiis consequuntur doloribus illum iste odit,
+        officiis recusandae sapiente! Harum, perferendis?</p>
+
+    <div class="ui section divider"></div>
+    <h3 class="ui center aligned icon header">
+        <i class="circular money icon"></i>
+    </h3>
+
+    <h3 class="ui header center aligned">Prix de votre voyage!</h3>
+    <div class="ui  massive black labels">
+        <div class="ui label middle aligned">
+            {{ article.price }} CHF
+        </div>
+    </div>
+
+    <div class="ui section divider"></div>
+    <h2 class="ui header center aligned">Tags</h2>
+
+    <div class="ui compact menu">
+        {% for tag in article.tags.all %}
+            <a class="item">
+                <i class="tag icon"></i>
+                {{ tag.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="ui section divider"></div>
+    <h2 class="ui header center aligned">Commentaires</h2>
+
+    {% for foo in article.comment_set.all %}
+        <div class="ui stackable two column grid">
+            <div class="column">
+                <div class="ui tall stacked segment">
+                    <h4 class="ui header">Mr. Smith</h4>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                        Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero
+                        sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="ui tall stacked segment">
+            <h4 class="ui header">Pas de commentaire pour le moment...</h4>
+            <a href="" class="ui btn-primary">Laisser un commentaire</a>
+        </div>
+    {% endfor %}
+
+
+
+
+
 {% endblock %}

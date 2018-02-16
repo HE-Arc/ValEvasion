@@ -5,16 +5,16 @@
 {% block content %}
     <div class="ui special cards">
         {% for article in article_list %}
-            <div class="card" href="{% url 'article-detail' article.id %}">
+            <div class="card">
                 <div class="blurring dimmable image">
                     <div class="ui dimmer">
                         <div class="content">
                             <div class="center">
-                                <div class="ui inverted button">Plus de détails</div>
+                                <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus de détails</a>
                             </div>
                         </div>
                     </div>
-                    <img src="{{ MEDIA_URL }}/{{ article.image }}">
+                    <img src="{% get_media_prefix %}{{ article.image }}">
                 </div>
                 <div class="content">
                     <a class="header">{{ article.title }}</a>
@@ -29,7 +29,7 @@
                     <a>
                         <i class="tags icon"></i>
                         {% for tag in article.tags.all %}
-                            {{ tag.name }}
+                            <a href="#">{{ tag.name }}</a>
                         {% endfor %}
                     </a>
                 </div>
