@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce import models as tinymce_models
 
 
 class Tag(models.Model):
@@ -14,7 +15,7 @@ class Tag(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     price = models.IntegerField()
-    description = models.TextField()
+    description = tinymce_models.HTMLField()
     country = models.CharField(max_length=50)
     image = models.ImageField()
     pub_date = models.DateTimeField('date published')
