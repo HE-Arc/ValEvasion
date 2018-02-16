@@ -3,47 +3,40 @@
 
 {% block title %}Nos Voyages{% endblock %}
 
-{% block content %} 
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-
-      <h1 class="display-4">Nos voyages</h1>
-      <p class="lead text-muted">Une liste de nos merveilleux voyages.</p>
-      <hr/>
-
-      <table class="table table-bordered mt-5">
-        <thead>
-          <tr>
-            <th>Titre</th>
-            <th>Image</th>
-            <th>Description</th>
-            <th>Prix</th>
-          </tr>
-        </thead>
-
-      {% for article in article_list %}
-
-      <tr>
-        <td>
-          {{ article.title }}
-        </td>
-        <td>
-          <img src="media/{{ article.image }}" alt="My image"/>
-        </td>
-        <td>
-          {{ article.description }}
-        </td>
-        <td>
-          {{ article.price }}
-        </td>
-        <td>
-          <a href="{% url 'article-detail' article.id %}" class="btn btn-primary btn-sm">Détails</a>
-        </td>
-
-      {% endfor %}
+{% block content %}
+    <div class="ui special cards">
+        {% for article in article_list %}
+            <div class="card" href="{% url 'article-detail' article.id %}">
+                <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                        <div class="content">
+                            <div class="center">
+                                <div class="ui inverted button">Plus de détails</div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ MEDIA_URL }}/{{ article.image }}">
+                </div>
+                <div class="content">
+                    <a class="header">{{ article.title }}</a>
+                    <div class="meta">
+                        <span class="date">Poster le {{ article.pub_date.date }}</span>
+                    </div>
+                    <div class="description">
+                        <p>{{ article.description }}</p>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                        <i class="tags icon"></i>
+                        {% for tag in article.tags.all %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Pas de voyage pour le moment</p>
+        {% endfor %}
     </div>
-  </div>
-</div>
 {% endblock %}

@@ -17,21 +17,21 @@ class Article(models.Model):
     description = models.TextField()
     country = models.CharField(max_length=50)
     image = models.ImageField()
-    pub_date = models.DateTimeField('Date de publication').default
-    tags = models.ManyToManyField(Tag)
-
+    pub_date = models.DateTimeField('date published')
+    update = models.DateTimeField(auto_now=True, auto_now_add=False)
+    tags = models.ManyToManyField(Tag, related_name='articles')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ('title',)
+        ordering = ('pub_date',)
 
 
 class Comment(models.Model):
     body = models.CharField(max_length=255)
     isAccepted = models.BooleanField(default=False)
-    pub_date = models.DateTimeField('Date de publication').default
+    pub_date = models.DateTimeField('date published', auto_now=True, auto_now_add=False)
     article = models.ForeignKey('Article', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -39,3 +39,4 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('body',)
+

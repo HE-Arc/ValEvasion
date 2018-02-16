@@ -1,15 +1,17 @@
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views import generic, View
-from django.urls import reverse_lazy
+from django.shortcuts import render
+from django.utils import timezone
+from django.views import generic
 
 from .models import Article
 
+
 class ArticleIndexView(generic.ListView):
     model = Article
+
     def get_queryset(self):
-        return Article.objects.all()
+        # TODO improve this query with pagination !
+        return Article.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date').prefetch_related('tags').all()
+
 
 class ArticleDetailView(generic.DetailView):
     model = Article
