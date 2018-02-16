@@ -4,9 +4,8 @@ Django==2.0.2
 django-appconf==1.0.2
 django-bootstrap-form==3.3
 django-debug-toolbar==1.9.1
-django-filebrowser==3.9.1
+django-filebrowser-no-grappelli==3.7.4
 django-generate-secret-key==1.0.2
-django-grappelli==2.10.2
 django-tinymce==2.7.0
 django-tinymce4-lite==1.7.0
 jsmin==2.2.2
