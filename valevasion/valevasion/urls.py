@@ -22,4 +22,5 @@ from valevasion import settings
 urlpatterns = [
     path('', include('travels.urls')),
     path('admin/', admin.site.urls),
+    path('mail', include('mail.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

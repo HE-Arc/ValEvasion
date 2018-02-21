@@ -36,11 +36,71 @@
     "model" : "travels.article",
     "pk": 2,
     "fields": {
+      "title": "Voyage en thailande",
+      "price": 2000,
+      "description": "some description",
+      "country": "Thailande",
+      "image": "taipei_101.jpg",
+      "pub_date": "2018-02-15 10:41:00",
+      "update": "2018-02-16 10:41:00",
+      "tags": "2"
+    }
+  },
+
+  {
+    "model" : "travels.article",
+    "pk": 3,
+    "fields": {
+      "title": "Voyage au canada",
+      "price": 1000,
+      "description": "some description",
+      "country": "Canada",
+      "image": "canada.jpg",
+      "pub_date": "2018-02-14 10:41:00",
+      "update": "2018-02-15 10:41:00",
+      "tags": "1"
+    }
+  },
+
+  {
+    "model" : "travels.article",
+    "pk": 4,
+    "fields": {
       "title": "Voyage au bénin",
       "price": 2000,
       "description": "some description",
       "country": "Bénin",
       "image": "benin.png",
+      "pub_date": "2018-02-15 10:41:00",
+      "update": "2018-02-16 10:41:00",
+      "tags": "2"
+    }
+  },
+
+  {
+    "model" : "travels.article",
+    "pk": 5,
+    "fields": {
+      "title": "Voyage à New York",
+      "price": 1000,
+      "description": "some description",
+      "country": "USA",
+      "image": "newyork.jpg",
+      "pub_date": "2018-02-14 10:41:00",
+      "update": "2018-02-15 10:41:00",
+      "tags": "1"
+    }
+  },
+
+  {
+    "model" : "travels.article",
+    "pk": 6,
+    "fields": {
+      "title": "Voyage à Paris",
+      "price": 2000,
+      "description": "some description",
+      "country": "Paris",
+      "image": "paris.jpg",
       "pub_date": "2018-02-15 10:41:00",
       "update": "2018-02-16 10:41:00",
       "tags": "2"

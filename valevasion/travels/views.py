@@ -10,7 +10,7 @@ class ArticleIndexView(generic.ListView):
 
     def get_queryset(self):
         # TODO improve this query with pagination !
-        return Article.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date').prefetch_related('tags').all()
+        return Article.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date').prefetch_related('tags').all()[:10]
 
 
 class ArticleDetailView(generic.DetailView):

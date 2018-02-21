@@ -4,6 +4,7 @@
 {% block title %}Nos Voyages{% endblock %}
 
 {% block content %}
+    <p>Nombre de voyage dans la liste : {{ article_list|length }}</p>
     <div class="ui special cards">
         {% for article in article_list %}
             <div class="card">
