@@ -1,7 +1,15 @@
 language: python
 python:
   - "3.6"
+service:
+  - mysql
+env:
+  -DJANGO=2.0.2 DB=mysql
 install:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
+before_script:
+  - mysql -e 'create database test;' -u root
 script:
-  - py.test
+  - cd valevasion
+  - mv valevasion/secret_config_exemple.py valevasion/secret_config.py
+  - python manage.py test

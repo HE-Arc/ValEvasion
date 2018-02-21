@@ -14,6 +14,7 @@ import os
 
 from .secret_config import DB_NAME, DB_PASSWORD, DB_USER, SECRET_KEY
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -90,6 +91,18 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
+}
+
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.mysql',
+            'NAME':     'travisci',
+            'USER':     'root',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
 }
 
 # Password validation
