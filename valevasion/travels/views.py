@@ -8,9 +8,18 @@ from .models import Article
 class ArticleIndexView(generic.ListView):
     model = Article
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ArticleIndexView, self).get_context_data()
+        context['filter_tags'] = self.request.GET.getlist('tags')
+
+        return context
+
     def get_queryset(self):
-        # TODO improve this query with pagination !
-        return Article.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date').prefetch_related('tags').all()[:10]
+        tags = self.request.GET.getlist('tags')
+        query = Article.objects.filter(pub_date__lte=timezone.now())
+        if tags:
+            query = query.filter(tags__name__in=self.request.GET.getlist('tags')).distinct()
+        return query.prefetch_related('tags')
 
 
 class ArticleDetailView(generic.DetailView):

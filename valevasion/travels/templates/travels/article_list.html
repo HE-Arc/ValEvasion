@@ -4,41 +4,56 @@
 {% block title %}Nos Voyages{% endblock %}
 
 {% block content %}
-    <p>Nombre de voyage dans la liste : {{ article_list|length }}</p>
+    <form method="get" action="{% url 'articles' %}" class="ui form">
+        {% csrf_token %}
+        <div class="field">
+            <select name="tags" multiple="" class="ui fluid dropdown">
+                <option value="">Skills</option>
+                <option value="bisal">bisal</option>
+                <option value="aventure">aventure</option>
+            </select>
+        </div>
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+
+    {% for filter_tag in filter_tags %}
+        {{ filter_tag }}
+    {% endfor %}
+
+    <br>
     <div class="ui special cards">
-        {% for article in article_list %}
-            <div class="card">
-                <div class="blurring dimmable image">
-                    <div class="ui dimmer">
-                        <div class="content">
-                            <div class="center">
-                                <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus de
-                                    détails</a>
-                            </div>
+    {% for article in article_list %}
+        <div class="card">
+            <div class="blurring dimmable image">
+                <div class="ui dimmer">
+                    <div class="content">
+                        <div class="center">
+                            <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus de
+                                détails</a>
                         </div>
                     </div>
-                    <img src="{{ MEDIA_URL }}{{ article.image }}">
                 </div>
-                <div class="content">
-                    <a class="header">{{ article.title }}</a>
-                    <div class="meta">
-                        <span class="date">Poster le {{ article.pub_date.date }}</span>
-                    </div>
-                    <div class="description">
-                        {{ article.description|safe }}
-                    </div>
+                <img src="{{ MEDIA_URL }}{{ article.image }}">
+            </div>
+            <div class="content">
+                <a class="header">{{ article.title }}</a>
+                <div class="meta">
+                    <span class="date">Poster le {{ article.pub_date.date }}</span>
                 </div>
-                <div class="extra content">
-                    <a>
-                        <i class="tags icon"></i>
-                        {% for tag in article.tags.all %}
-                            <a href="#">{{ tag.name }}</a>
-                        {% endfor %}
-                    </a>
+                <div class="description">
+                    {{ article.description|safe }}
                 </div>
             </div>
-        {% empty %}
-            <p>Pas de voyage pour le moment</p>
-        {% endfor %}
-    </div>
+            <div class="extra content">
+                <a>
+                    <i class="tags icon"></i>
+                    {% for tag in article.tags.all %}
+                        <a href="#">{{ tag.name }}</a>
+                    {% endfor %}
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        <p>Pas de voyage pour le moment</p>
+    {% endfor %}
 {% endblock %}
