@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'filebrowser',
     'django_countries',
     'django.contrib.admin',
+    'avatar',
 ]
 
 MIDDLEWARE = [

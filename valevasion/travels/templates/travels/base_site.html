@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load static %}
+{% load avatar_tags %}
 
 <!DOCTYPE html>
 <html>
@@ -63,7 +64,8 @@
 <div class="ui fixed stackable inverted menu">
     <div class="ui container">
         <a href="{% url 'index' %}" class="header item">
-            <img class="logo" src="assets/images/logo.png">
+            {% avatar user 65 class="ui mini circular image" id="user_avatar" %}
+            &nbsp <!-- just add space -->
             ValEvasion
         </a>
         <a href="{% url 'index' %}" class="item">Home</a>
