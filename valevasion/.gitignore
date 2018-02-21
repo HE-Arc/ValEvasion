@@ -109,3 +109,11 @@ venv.bak/
 valevasion/secret_config.py
 
 .idea/*
+
+/media/*.*
+/media/uploads/*
+/media/_versions/*
+
+/static/*
+
+
