@@ -111,7 +111,7 @@ valevasion/secret_config.py
 .idea/*
 
 /media/*.*
-/media/uploads/*
+/media/uploads/*.*
 /media/_versions/*
 
 /static/*
