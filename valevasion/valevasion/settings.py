@@ -14,7 +14,6 @@ import os
 
 from .secret_config import DB_NAME, DB_PASSWORD, DB_USER, SECRET_KEY
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'travels.apps.TravelsConfig',
     'behave_django',
     'debug_toolbar',
@@ -96,14 +96,14 @@ DATABASES = {
 if 'TRAVIS' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE':   'django.db.backends.mysql',
-            'NAME':     'travisci',
-            'USER':     'root',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'travisci',
+            'USER': 'root',
             'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
+            'HOST': 'localhost',
+            'PORT': '',
         }
-}
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -146,6 +146,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 INTERNAL_IPS = '127.0.0.1'
+
+SITE_ID = 2
 
 # Settings TinyMCE
 TINYMCE_DEFAULT_CONFIG = {

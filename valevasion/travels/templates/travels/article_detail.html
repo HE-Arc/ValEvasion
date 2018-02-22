@@ -3,7 +3,6 @@
 {% block title %}Details | {{ article.title }}{% endblock %}
 
 {% block content %}
-
     <div class="ui one cards">
         <a class=" black card">
             <div class="image">
@@ -16,7 +15,6 @@
         {{ article.title }} <br>
         <a href="#" class="ui primary button">Je veux réserver !</a>
     </h1>
-
 
     <div class="ui section divider"></div>
     <h3 class="ui center aligned icon header">
@@ -53,14 +51,12 @@
     <div class="ui section divider"></div>
     <h2 class="ui header center aligned">Commentaires</h2>
 
-    {% for foo in article.comment_set.all %}
-        <div class="ui stackable two column grid">
+    {% for comment in comments %}
+        <div class="ui stackable 4 column grid">
             <div class="column">
                 <div class="ui tall stacked segment">
-                    <h4 class="ui header">Mr. Smith</h4>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                        Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero
-                        sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                    <h4 class="ui header">{{ comment.user }}</h4>
+                    <p>{{ comment.body }}</p>
                 </div>
             </div>
         </div>

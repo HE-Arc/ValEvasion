@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views import generic
 
-from .models import Article
+from .models import Article, Comment
 
 
 class ArticleIndexView(generic.ListView):
@@ -11,7 +11,6 @@ class ArticleIndexView(generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ArticleIndexView, self).get_context_data()
         context['filter_tags'] = self.request.GET.getlist('tags')
-
         return context
 
     def get_queryset(self):
@@ -24,6 +23,12 @@ class ArticleIndexView(generic.ListView):
 
 class ArticleDetailView(generic.DetailView):
     model = Article
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        context = super(ArticleDetailView, self).get_context_data()
+        context['comments'] = Comment.objects.filter(article=pk).filter(isAccepted=True).prefetch_related('user')
+        return context
 
 
 def index(request):
