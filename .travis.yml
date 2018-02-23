@@ -11,5 +11,5 @@ before_script:
   - mysql -e 'create database test;' -u root
 script:
   - cd valevasion
-  - mv valevasion/secret_config_exemple.py valevasion/secret_config.py
+  - mv valevasion/.env.example valevasion/.env
   - python manage.py test

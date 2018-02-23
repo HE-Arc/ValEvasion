@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
-from .secret_config import DB_NAME, DB_PASSWORD, DB_USER, SECRET_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,22 +31,30 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'travels.apps.TravelsConfig',
+    'django_countries',
+    'django.contrib.admin',
+)
+
+THIRD_PARTY_APPS = (
     'behave_django',
     'debug_toolbar',
     'tinymce',
     'filebrowser',
-    'django_countries',
-    'django.contrib.admin',
     'avatar',
-]
+)
+
+LOCAL_APPS = (
+    'travels.apps.TravelsConfig',
+)
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -85,11 +94,11 @@ WSGI_APPLICATION = 'valevasion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
