@@ -27,7 +27,7 @@ class ArticleDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         pk = self.kwargs['pk']
         context = super(ArticleDetailView, self).get_context_data()
-        context['comments'] = Comment.objects.filter(article=pk).filter(isAccepted=True).prefetch_related('user')
+        context['comments'] = Comment.objects.filter(article=pk).filter(isAccepted=True).prefetch_related('author')
         return context
 
 

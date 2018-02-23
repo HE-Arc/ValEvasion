@@ -1,5 +1,5 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.auth.models import User
 from tinymce import models as tinymce_models
 from django_countries.fields import CountryField
 
@@ -36,10 +36,11 @@ class Comment(models.Model):
     isAccepted = models.BooleanField(default=False)
     pub_date = models.DateTimeField('date published', auto_now=True, auto_now_add=False)
     article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, related_name='user')
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=1, related_name='author')
+
 
     def __str__(self):
         return self.body
 
     class Meta:
-        ordering = ('body',)
+        ordering = ('pub_date',)
