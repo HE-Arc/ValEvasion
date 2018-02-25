@@ -30,7 +30,3 @@ class ArticleDetailView(generic.DetailView):
         context['comments'] = Comment.objects.filter(article=pk).filter(isAccepted=True).prefetch_related('author')
         return context
 
-
-def index(request):
-    context = {}
-    return render(request, 'travels/index.html', context)

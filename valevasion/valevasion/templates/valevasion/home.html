@@ -1,0 +1,53 @@
+{% extends 'valevasion/base.html' %}
+{% block content %}
+<div class="ui vertical masthead center aligned segment header-image">
+    <div class="ui container blur">
+        <div class="ui text container">
+            <h1 class="ui inverted header"> ValEvasion </h1>
+            <h2 class="sub-tile-header">Votre agence de voyage!</h2>
+            <a href="{% url 'articles' %}">
+                <div class="ui huge primary button">Voir les voyages <i class="right arrow icon"></i></div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="ui center aligned container">
+    <h1 class="title-name">ValEvasion</h1>
+</div>
+<div class="ui container">
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <div class="ui basic segment">
+                <h3>Un voyage qui nous correspond</h3>
+                <p>Nous efforçons de trouver les meilleurs voyage avec les meilleurs prix!</p>
+            </div>
+            <div class="ui basic segment">
+                <h3>Nous nous occupons de tout!</h3>
+                <p>Réservation du billet d'avion, réservation de l'hôtel et transport jusquà votre hôtel!</p>
+            </div>
+        </div>
+        <div class="column">
+            <img class="ui large rounded image" src="{{MEDIA_URL}}plane.jpg">
+        </div>
+    </div>
+    <div class="ui center aligned basic segment">
+        <a class="ui huge button" href="{% url 'articles' %}">Voir nos offres de voyages</a>
+    </div>
+</div>
+<div class="ui two column stackable celled grid center aligned">
+    <div class="column">
+        <h3>"Incroyable expérience!"</h3>
+        <p>Ce qui se dit à propos de nous</p>
+    </div>
+    <div class="column">
+        <h3>"Excellente agence de voyage" </h3>
+    </div>
+</div>
+<div class="ui vertical stripe very padded segment">
+    <div class="ui center aligned text container">
+        <h3 class="ui header">Partagez votre expérience avec d'autres personnes</h3>
+        <p>Vous pouvez partager vos photos ou tout simplement laisser un commentaire sur votre voyage</p>
+        <a class="ui large button" href="#">Je veux partager mon expérience</a>
+    </div>
+</div>
+{% endblock %}
