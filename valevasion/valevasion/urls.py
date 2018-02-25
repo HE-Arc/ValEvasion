@@ -26,6 +26,7 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('avatar/', include('avatar.urls')),
+    path('contact/', include('mail.urls')),
 ]
 
 if settings.DEBUG:

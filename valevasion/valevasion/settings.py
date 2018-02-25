@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'travels.apps.TravelsConfig',
+    'mail.apps.MailConfig',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
