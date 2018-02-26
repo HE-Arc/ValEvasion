@@ -1,13 +1,16 @@
-from django.shortcuts import render
-from django.views import generic
-from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 
-from .models import Mail
+from .forms import MailForm
 
 # Create your views here.
 
-class MailCreateView(generic.CreateView):
-    model = Mail
-    fields = '__all__'
-    success_url = reverse_lazy('mail-new')
+def mail_new(request):
+    form = MailForm(request.POST)
+    if form.is_valid():
+        sender = request.user.email
+        subject = form.cleaned_data['subject']
+        content = form.cleaned_data['content']
+        send_mail(subject, content, sender, ['laurent.gander7@gmail.com'], fail_silently=False)
+        return redirect('mail-new')
+    return render(request, 'mail/mail_form.html', {'form' : form})

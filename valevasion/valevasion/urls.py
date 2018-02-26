@@ -17,15 +17,19 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from valevasion import settings
+from . import settings
+from . import views
 from filebrowser.sites import site
 
 urlpatterns = [
+    path('', views.index, name='home'),
     path('', include('travels.urls')),
     path('admin/filebrowser/', site.urls),
     path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('avatar/', include('avatar.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('', include('users.urls')),
     path('contact/', include('mail.urls')),
 ]
 

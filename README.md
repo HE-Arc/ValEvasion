@@ -9,7 +9,9 @@ Project for a travel agency website
 3. Open this **.env** and fill in the empty fields with your personal data
 4. Be sure to have the different python package installed on your machine **pip install -r requirements.txt**
 5. Collect the static file **python manage.py collectstatic**
-5. run the server **python manage.py runserver**
+6. Apply the migrations **python manage.py migrate**
+7. run the server **python manage.py runserver**
+
 
 ## Technology used for this project
 [CSS - Semantic-UI](https://semantic-ui.com) <br>

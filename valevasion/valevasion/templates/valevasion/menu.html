@@ -1,0 +1,60 @@
+<div class="ui fixed inverted borderless huge menu"> <!--add fixed if necessary -->
+    <div class="ui container grid">
+        <!-- Computer version -->
+        <div class="computer only row">
+            <a class="header item" href="{% url 'home' %}">ValEvasion</a>
+            <a class="active item" href="{% url 'home' %}">Accueil</a>
+            <a class="item" href="{% url 'articles' %}">Nos voyages</a>
+            <a class="item">Contact</a>
+            <div class="right menu">
+                {% if user.is_authenticated %}
+                <div class="ui simple dropdown item">{{ user.get_username }}<i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item"> <i class="user icon"></i>Mon compte</a>
+                        <a class="item"> <i class="plane icon"></i> Mes voyages</a>
+                        <div class="ui divider"></div>
+                        <a class="item" href="{% url 'account_logout'%}"> <i class="sign out alternate icon"></i> Se
+                            déconnecter </a>
+                    </div>
+                </div>
+                {% else %}
+                <a class="item" href="{% url 'account_login'%}">Connexion</a>
+                <a class="item" href="{% url 'account_signup'%}">Inscription</a>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Mobile version -->
+        <div class="tablet mobile only row">
+            <div class="left menu">
+                <a class="menu item">
+                    <div class="ui basic inverted icon toggle button">
+                        <i class="content icon"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="ui inverted vertical accordion borderless fluid menu">
+                <a class="active item" href="{% url 'home' %}"> Accueil</a>
+                <a class="item" href="{% url 'articles' %}"> Nos voyages</a>
+                <a class="item"> Contact</a>
+                {% if user.is_authenticated %}
+                <div class="item">
+                    <div class="title">
+                        {{ user.get_username }}<i class="dropdown icon"></i>
+                    </div>
+                    <div class="content">
+                        <a class="item"> <i class="user icon"></i>Mon compte</a>
+                        <a class="item"> <i class="plane icon"></i> Mes voyages</a>
+                        <div class="ui divider"></div>
+                        <a class="item" href="{% url 'account_logout'%}"> <i class="sign out alternate icon"></i> Se
+                            déconnecter </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="ui divider"></div>
+                <a class="item" href="{% url 'account_login'%}">Connexion</a>
+                <a class="item" href="{% url 'account_signup'%}">Inscription</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
