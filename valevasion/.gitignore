@@ -116,3 +116,4 @@ valevasion/secret_config.py
 /media/_versions/
 
 /static/*
+/staticfiles/*

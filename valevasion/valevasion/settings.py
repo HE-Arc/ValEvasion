@@ -31,10 +31,12 @@ ALLOWED_HOSTS = []
 
 # MailConfig
 
-EMAIL_HOST = os.environ.get('MAIL_TRAP_EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('MAIL_TRAP_EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('MAIL_TRAP_EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.environ.get('MAIL_TRAP_EMAIL_PORT')
+EMAIL_HOST = os.environ.get('GMAIL_EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('GMAIL_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.environ.get('GMAIL_EMAIL_PORT')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS=1
 
 
 # Application definition

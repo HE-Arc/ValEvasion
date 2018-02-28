@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 
 from .forms import MailForm
 
+
 # Create your views here.
 
 def mail_new(request):
@@ -13,4 +14,4 @@ def mail_new(request):
         content = form.cleaned_data['content']
         send_mail(subject, content, sender, ['laurent.gander7@gmail.com'], fail_silently=False)
         return redirect('mail-new')
-    return render(request, 'mail/mail_form.html', {'form' : form})
+    return render(request, 'mail/mail_form.html', {'form': form})
