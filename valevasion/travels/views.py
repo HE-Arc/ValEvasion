@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.urls import reverse
 from django.utils import timezone
-from django.views import generic
+from django.views import View
+from django.views.generic import DetailView, ListView
+from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import FormView
 
+from .forms.CommentForm import CommentForm
 from .models import Article, Comment
 
 
-class ArticleIndexView(generic.ListView):
+class ArticleIndexView(ListView):
     model = Article
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -21,12 +25,47 @@ class ArticleIndexView(generic.ListView):
         return query.prefetch_related('tags')
 
 
-class ArticleDetailView(generic.DetailView):
+class ArticleDetailView(View):
+    def get(self, request, *args, **kwargs):
+        view = ArticleDisplay.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = ArticleComment.as_view()
+        return view(request, *args, **kwargs)
+
+
+class ArticleDisplay(DetailView):
     model = Article
 
     def get_context_data(self, **kwargs):
-        pk = self.kwargs['pk']
-        context = super(ArticleDetailView, self).get_context_data()
-        context['comments'] = Comment.objects.filter(article=pk).filter(isAccepted=True).prefetch_related('author')
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(article=self.object.pk).filter(isAccepted=True).prefetch_related(
+            'author')
+        context['form'] = CommentForm()
         return context
 
+
+class ArticleComment(SingleObjectMixin, FormView):
+    template_name = 'travels/article_detail.html'
+    form_class = CommentForm
+    model = Article
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            c = Comment()
+            c.body = form.cleaned_data['body']
+            c.isAccepted = True
+            c.author = request.user
+            c.article = self.object
+            c.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('article-detail', kwargs={'pk': self.object.pk})

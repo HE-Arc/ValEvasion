@@ -28,7 +28,7 @@ class Article(models.Model):
         return self.title
 
     class Meta:
-        ordering = ('pub_date',)
+        ordering = ('-pub_date',)
 
 
 class Comment(models.Model):
@@ -38,9 +38,8 @@ class Comment(models.Model):
     article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=1, related_name='author')
 
-
     def __str__(self):
         return self.body
 
     class Meta:
-        ordering = ('pub_date',)
+        ordering = ('-pub_date',)
