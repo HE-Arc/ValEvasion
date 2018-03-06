@@ -1,0 +1,31 @@
+{% extends 'valevasion/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div id="content">
+    <div class="ui text container">
+        <h2 class="ui center aligned icon header">
+            <i class="circular user plus icon"></i>
+            S'inscrire
+        </h2>
+        <div class="ui center aligned basic segment">
+            <div class="ui form">
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button type="submit">S'inscrire</button>
+                </form>
+            </div>
+            <div class="ui horizontal divider medium-vertical-padding">
+                Ou
+            </div>
+            <div>
+                <p> Vous possédez déjà un compte? Alors veuillez vous <a href="{{ login_url }}">connectez ici</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

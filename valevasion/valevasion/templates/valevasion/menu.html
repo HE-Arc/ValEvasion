@@ -3,25 +3,31 @@
         <!-- Computer version -->
         <div class="computer only row">
             <a class="header item" href="{% url 'home' %}">Val-Evasion</a>
-            <a class="active item" href="{% url 'home' %}">Accueil</a>
-            <a class="item" href="{% url 'articles' %}">Nos voyages</a>
-            <a class="item" href="{% url 'photologue:gallery-list' %}">Gallerie</a>
-            <a class="item" href="{% url 'mail-new' %}">Contact</a>
+            <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %} item" href="{% url 'home' %}">Accueil</a>
+            <a class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %} item"
+               href="{% url 'articles' %}">Nos voyages</a>
+            <a class="{% if request.resolver_match.url_name == 'photologue:gallery-list' %}active{% endif %} item"
+               href="{% url 'photologue:gallery-list' %}">Gallerie</a>
+            <a class="{% if request.resolver_match.url_name == 'mail-new' %}active{% endif %} item"
+               href="{% url 'mail-new' %}">Contact</a>
             <div class="right menu">
                 {% if user.is_authenticated %}
                 <div class="ui simple dropdown item">{{ user.get_username }}<i class="dropdown icon"></i>
                     <div class="menu">
-                        <a class="item"> <i class="user icon"></i>Mon compte</a>
-                        <a class="item"> <i class="plane icon"></i> Mes voyages</a>
-                        <a class="item"> <i class="plane icon"></i> Ma Gallerie</a>
+                        <a class=" {% if request.resolver_match.url_name == 'account_home' %}active{% endif %} item"
+                           href="{% url 'account_home' %}"> <i class="user icon"></i>Mon compte</a>
+                        <a class="{% if request.resolver_match.url_name == 'account_travels' %}active{% endif %} item"
+                           href="{% url 'account_travels' %}"> <i class="plane icon"></i> Mes voyages</a>
                         <div class="ui divider"></div>
                         <a class="item" href="{% url 'account_logout'%}"> <i class="sign out alternate icon"></i> Se
                             déconnecter </a>
                     </div>
                 </div>
                 {% else %}
-                <a class="item" href="{% url 'account_login'%}">Connexion</a>
-                <a class="item" href="{% url 'account_signup'%}">Inscription</a>
+                <a class="{% if request.resolver_match.url_name == 'account_login' %}active{% endif %} item"
+                   href="{% url 'account_login'%}">Connexion</a>
+                <a class="{% if request.resolver_match.url_name == 'account_signup' %}active{% endif %} item"
+                   href="{% url 'account_signup'%}">Inscription</a>
                 {% endif %}
             </div>
         </div>
@@ -35,19 +41,24 @@
                 </a>
             </div>
             <div class="ui inverted vertical accordion borderless fluid menu">
-                <a class="active item" href="{% url 'home' %}"> Accueil</a>
-                <a class="item" href="{% url 'articles' %}"> Nos voyages</a>
-                <a class="item" href="{% url 'photologue:gallery-list' %}">Gallerie</a>
-                <a class="item" href="{% url 'mail-new' %}"> Contact</a>
+                <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %} item"
+                   href="{% url 'home' %}"> Accueil</a>
+                <a class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %} item"
+                   href="{% url 'articles' %}"> Nos voyages</a>
+                <a class="{% if request.resolver_match.url_name == 'photologue:gallery-list' %}active{% endif %} item"
+                   href="{% url 'photologue:gallery-list' %}"> Gallerie</a>
+                <a class="{% if request.resolver_match.url_name == 'mail-new' %}active{% endif %} item"
+                   href="{% url 'mail-new' %}"> Contact</a>
                 {% if user.is_authenticated %}
                 <div class="item">
                     <div class="title">
                         {{ user.get_username }}<i class="dropdown icon"></i>
                     </div>
                     <div class="content">
-                        <a class="item"> <i class="user icon"></i>Mon compte</a>
-                        <a class="item"> <i class="plane icon"></i> Mes voyages</a>
-                        <a class="item"> <i class="plane icon"></i> Ma Gallerie</a>
+                        <a class="{% if request.resolver_match.url_name == 'account_home' %}active{% endif %} item"
+                           href="{% url 'account_home' %}"> <i class="user icon"></i>Mon compte</a>
+                        <a class="{% if request.resolver_match.url_name == 'account_travels' %}active{% endif %} item"
+                           href="{% url 'account_travels' %}"> <i class="plane icon"></i> Mes voyages</a>
                         <div class="ui divider"></div>
                         <a class="item" href="{% url 'account_logout'%}"> <i class="sign out alternate icon"></i> Se
                             déconnecter </a>
@@ -55,8 +66,10 @@
                 </div>
                 {% else %}
                 <div class="ui divider"></div>
-                <a class="item" href="{% url 'account_login'%}">Connexion</a>
-                <a class="item" href="{% url 'account_signup'%}">Inscription</a>
+                <a class="{% if request.resolver_match.url_name == 'account_login' %}active{% endif %} item"
+                   href="{% url 'account_login'%}">Connexion</a>
+                <a class="{% if request.resolver_match.url_name == 'account_signup' %}active{% endif %} item"
+                   href="{% url 'account_signup'%}">Inscription</a>
                 {% endif %}
             </div>
         </div>
