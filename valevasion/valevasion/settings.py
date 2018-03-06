@@ -51,6 +51,9 @@ THIRD_PARTY_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.github',
 )
 
@@ -60,7 +63,7 @@ LOCAL_APPS = (
     'users',
 )
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -78,7 +81,7 @@ ROOT_URLCONF = 'valevasion.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -205,6 +208,10 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'

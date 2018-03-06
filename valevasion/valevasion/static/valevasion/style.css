@@ -1,3 +1,11 @@
+.medium-vertical-padding{
+    padding: 25px 0 25px 0 !important;
+}
+
+.small-vertical-padding{
+    padding: 5px 0 5px 0 !important;
+}
+
 .hidden.menu {
     display: none;
 }

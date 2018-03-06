@@ -1,0 +1,70 @@
+{% extends 'valevasion/base.html' %}
+{% block content %}
+<div id="content">
+    <div class="ui text container">
+
+        <h2 class="ui center aligned icon header">
+            <i class="circular users icon"></i>
+            Se connecter
+        </h2>
+        {% load account socialaccount %}
+
+        {% get_providers as socialaccount_providers %}
+
+        {% if socialaccount_providers %}
+
+        <div class="ui center aligned basic segment">
+            <div class="ui form">
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <!--<div class="field">
+                        <label>Nom d'utilisateur ou e-mail</label>
+                        <div class="ui left icon input">
+                            <input placeholder="Nom d'utilisateur ou e-mail" type="text">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Mot de passe</label>
+                        <div class="ui left icon input">
+                            <input type="password" placeholder="Mot de passe">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>-->
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button class="ui blue submit button" type="submit">Se connecter</button>
+                    <a class="" href="{% url 'account_reset_password' %}">Mot de passe oublié?</a>
+                </form>
+            </div>
+            <div class="ui horizontal divider medium-vertical-padding">
+                Ou
+            </div>
+            <div class="socialaccount_ballot">
+                <ul class="socialaccount_providers">
+                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+            </div>
+
+            {% include "socialaccount/snippets/login_extra.html" %}
+        </div>
+        {% else %}
+        <div class="ui center aligned basic segment">
+            <div class="ui form">
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button class="ui blue submit button" type="submit">Se connecter</button>
+                    <a class="" href="{% url 'account_reset_password' %}">Mot de passe oublié?</a>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
