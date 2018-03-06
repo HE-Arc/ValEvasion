@@ -15,6 +15,10 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
+#ACCOUNT_EMAIL_REQUIRED = True
+#AUTH_USER_EMAIL_UNIQUE = True
+#ACCOUNT_UNIQUE_EMAIL = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,6 +54,7 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django_countries',
     'django.contrib.admin',
+    'django.contrib.sitemaps',
 )
 
 THIRD_PARTY_APPS = (
@@ -62,6 +67,8 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'photologue',
+    'sortedm2m',
 )
 
 LOCAL_APPS = (
@@ -71,7 +78,7 @@ LOCAL_APPS = (
     'mail',
 )
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -89,7 +96,7 @@ ROOT_URLCONF = 'valevasion.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

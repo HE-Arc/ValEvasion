@@ -16,10 +16,17 @@ Including another URLconf
 
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from . import settings
 from . import views
 from filebrowser.sites import site
+from photologue.sitemaps import GallerySitemap, PhotoSitemap
+
+sitemaps = {
+    'photologue_galleries': GallerySitemap,
+    'photologue_photos': PhotoSitemap,
+}
 
 urlpatterns = [
     path('', views.index, name='home'),
@@ -31,7 +38,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('users.urls')),
     path('contact/', include('mail.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('photologue/', include('photologue.urls', namespace='photologue'))
 ]
+
 
 if settings.DEBUG:
     import debug_toolbar
