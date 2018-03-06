@@ -3,72 +3,77 @@
 {% block title %}Details | {{ article.title }}{% endblock %}
 
 {% block content %}
-<div id="content">
-    <div class="ui text container">
-        <div class="ui one cards">
-            <a class=" black card">
-                <div class="image">
-                    <img class="ui fluid image" src="{{ MEDIA_URL }}{{ article.image }}">
-                </div>
-            </a>
-        </div>
-
-        <h1 class="ui center aligned header">
-            {{ article.title }} <br>
-            <a href="#" class="ui primary button">Je veux réserver !</a>
-        </h1>
-
-        <div class="ui section divider"></div>
-        <h3 class="ui center aligned icon header">
-            <i class="circular plane icon"></i>
-        </h3>
-        <h3 class="ui header center aligned">Desciptions détailées de votre voyage !</h3>
-
-        {{ article.description|safe }}</p>
-
-        <div class="ui section divider"></div>
-        <h3 class="ui center aligned icon header">
-            <i class="circular money icon"></i>
-        </h3>
-
-        <h3 class="ui header center aligned">Prix de votre voyage!</h3>
-        <div class="ui  massive black labels">
-            <div class="ui label middle aligned">
-                {{ article.price }} CHF
+    <div id="content">
+        <div class="ui text container">
+            <div class="ui one cards">
+                <a class=" black card">
+                    <div class="image">
+                        <img class="ui fluid image" src="{{ MEDIA_URL }}{{ article.image }}">
+                    </div>
+                </a>
             </div>
-        </div>
 
-        <div class="ui section divider"></div>
-        <h2 class="ui header center aligned">Tags</h2>
+            <h1 class="ui center aligned header">
+                {{ article.title }} <br>
+                <a href="#" class="ui primary button">Je veux réserver !</a>
+            </h1>
 
-        <div class="ui compact menu">
-            {% for tag in article.tags.all %}
-            <a class="item">
-                <i class="tag icon"></i>
-                {{ tag.name }}
-            </a>
-            {% endfor %}
-        </div>
+            <div class="ui section divider"></div>
+            <h3 class="ui center aligned icon header">
+                <i class="circular plane icon"></i>
+            </h3>
+            <h3 class="ui header center aligned">Desciptions détailées de votre voyage !</h3>
 
-        <div class="ui section divider"></div>
-        <h2 class="ui header center aligned">Commentaires</h2>
+            {{ article.description|safe }}</p>
 
-        {% for comment in comments %}
-        <div class="ui stackable 4 column grid">
-            <div class="column">
+            <div class="ui section divider"></div>
+            <h3 class="ui center aligned icon header">
+                <i class="circular money icon"></i>
+            </h3>
+
+            <h3 class="ui header center aligned">Prix de votre voyage!</h3>
+            <div class="ui  massive black labels">
+                <div class="ui label middle aligned">
+                    {{ article.price }} CHF
+                </div>
+            </div>
+
+            <div class="ui section divider"></div>
+            <h2 class="ui header center aligned">Tags</h2>
+
+            <div class="ui compact menu">
+                {% for tag in article.tags.all %}
+                    <a class="item">
+                        <i class="tag icon"></i>
+                        {{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+
+            <div class="ui section divider"></div>
+            <h2 class="ui header center aligned">Commentaires</h2>
+
+            <form method="post" action="{% url 'article-detail' article.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Envoi</button>
+            </form>
+            {% for comment in comments %}
+                <div class="ui stackable 4 column grid">
+                    <div class="column">
+                        <div class="ui tall stacked segment">
+                            <h4 class="ui header">{{ comment.author }}</h4>
+                            <p>{{ comment.body }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
                 <div class="ui tall stacked segment">
-                    <h4 class="ui header">{{ comment.author }}</h4>
-                    <p>{{ comment.body }}</p>
+                    <h4 class="ui header">Pas de commentaire pour le moment...</h4>
+                    <a href="" class="ui btn-primary">Laisser un commentaire</a>
                 </div>
-            </div>
-        </div>
-        {% empty %}
-        <div class="ui tall stacked segment">
-            <h4 class="ui header">Pas de commentaire pour le moment...</h4>
-            <a href="" class="ui btn-primary">Laisser un commentaire</a>
-        </div>
-        {% endfor %}
+            {% endfor %}
 
+        </div>
     </div>
-</div>
 {% endblock %}

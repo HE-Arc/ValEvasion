@@ -30,6 +30,7 @@ urlpatterns = [
     path('avatar/', include('avatar.urls')),
     path('accounts/', include('allauth.urls')),
     path('', include('users.urls')),
+    path('contact/', include('mail.urls')),
 ]
 
 if settings.DEBUG:

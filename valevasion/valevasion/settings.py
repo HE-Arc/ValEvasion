@@ -29,6 +29,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# MailConfig
+
+EMAIL_HOST = os.environ.get('GMAIL_EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('GMAIL_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.environ.get('GMAIL_EMAIL_PORT')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS=1
+
+
 # Application definition
 
 DJANGO_APPS = (
@@ -61,6 +71,7 @@ LOCAL_APPS = (
     'travels.apps.TravelsConfig',
     'valevasion',
     'users',
+    'mail',
 )
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -165,8 +176,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 INTERNAL_IPS = '127.0.0.1'
 
-SITE_ID = 2
-
 # Settings TinyMCE
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
@@ -206,7 +215,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_LOGOUT_ON_GET = True
