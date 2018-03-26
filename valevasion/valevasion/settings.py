@@ -120,11 +120,11 @@ WSGI_APPLICATION = 'valevasion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME', 'GROUPNAME'),
-        'USER': os.environ.get('DB_USER', 'GROUPNAME'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'PASSWORD'),
-        'HOST': os.environ.get('DB_HOST', 'MYSQL_HOST'),
-        'PORT': os.environ.get('DB_PORT', 'MYSQL_PORT'),
+        'NAME': os.environ.get('GROUPNAME', 'valevasion'),
+        'USER': os.environ.get('GROUPNAME', 'root'),
+        'PASSWORD': os.environ.get('PASSWORD', ''),
+        'HOST': os.environ.get('MYSQL_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('MYSQL_PORT', '3306'),
     }
 }
 
