@@ -15,9 +15,9 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
-#ACCOUNT_EMAIL_REQUIRED = True
-#AUTH_USER_EMAIL_UNIQUE = True
-#ACCOUNT_UNIQUE_EMAIL = True
+# ACCOUNT_EMAIL_REQUIRED = True
+# AUTH_USER_EMAIL_UNIQUE = True
+# ACCOUNT_UNIQUE_EMAIL = True
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'valevasion.srvz-webapp.he-arc.ch']
+ALLOWED_HOSTS = ['valevasion.srvz-webapp.he-arc.ch', '127.0.0.1']
+
 
 # MailConfig
 
@@ -40,8 +41,7 @@ EMAIL_HOST_USER = os.environ.get('GMAIL_EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('GMAIL_EMAIL_PORT')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS=1
-
+EMAIL_USE_TLS = 1
 
 # Application definition
 
@@ -121,11 +121,11 @@ WSGI_APPLICATION = 'valevasion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'NAME': os.environ.get('GROUPNAME', 'valevasion'),
+        'USER': os.environ.get('GROUPNAME', 'root'),
+        'PASSWORD': os.environ.get('PASSWORD', ''),
+        'HOST': os.environ.get('MYSQL_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('MYSQL_PORT', '3306'),
     }
 }
 
@@ -176,7 +176,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
