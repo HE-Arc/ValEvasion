@@ -5,6 +5,22 @@
 {% block title %}Nos Voyages{% endblock %}
 
 {% block content %}
+
+<script>
+    function add_tag(name) {
+        var dropdown = document.getElementsByClassName("fluid");
+
+        var a = document.createElement('a');
+        var linkText = document.createTextNode("my title text");
+        a.appendChild(linkText);
+        a.title = "my title text";
+        a.href = "http://example.com";
+
+        dropdown[0].appendChild(a);
+        console.log(dropdown);
+
+    }
+</script>
 <div id="content">
     <div class="ui container">
         <div class="ui basic segment">
@@ -16,10 +32,16 @@
                         <option value="bisal">bisal</option>
                         <option value="aventure">aventure</option>
                     </select>
+                    <div id="test">
+
+                    </div>
                 </div>
                 <button class="ui button" type="submit">Submit</button>
             </form>
             {% for filter_tag in filter_tags %}
+            <script>
+                add_tag("{{filter_tag}}");
+            </script>
             {{ filter_tag }}
             {% endfor %}
         </div>
