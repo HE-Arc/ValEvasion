@@ -5,22 +5,6 @@
 {% block title %}Nos Voyages{% endblock %}
 
 {% block content %}
-
-<script>
-    function add_tag(name) {
-        var dropdown = document.getElementsByClassName("fluid");
-
-        var a = document.createElement('a');
-        var linkText = document.createTextNode("my title text");
-        a.appendChild(linkText);
-        a.title = "my title text";
-        a.href = "http://example.com";
-
-        dropdown[0].appendChild(a);
-        console.log(dropdown);
-
-    }
-</script>
 <div id="content">
     <div class="ui container">
         <div class="ui basic segment">
@@ -29,19 +13,14 @@
                 <div class="field">
                     <select name="tags" multiple="" class="ui fluid dropdown">
                         <option value="">Skills</option>
-                        <option value="bisal">bisal</option>
-                        <option value="aventure">aventure</option>
+                        {% for tag in tags.all %}
+                        <option value="{{ tag.name }}">{{ tag.name }}</option>
+                        {% endfor %}
                     </select>
-                    <div id="test">
-
-                    </div>
                 </div>
                 <button class="ui button" type="submit">Submit</button>
             </form>
             {% for filter_tag in filter_tags %}
-            <script>
-                add_tag("{{filter_tag}}");
-            </script>
             {{ filter_tag }}
             {% endfor %}
         </div>
@@ -54,7 +33,8 @@
                         <div class="ui dimmer">
                             <div class="content">
                                 <div class="center">
-                                    <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus de
+                                    <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus
+                                        de
                                         détails</a>
                                 </div>
                             </div>
@@ -91,5 +71,9 @@
     $('.special.cards .image').dimmer({
         on: 'hover'
     });
+
+    function addTag(name) {
+        alert(name);
+    }
 </script>
 {% endblock %}

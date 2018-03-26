@@ -6,15 +6,17 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormView
 
 from .forms.CommentForm import CommentForm
-from .models import Article, Comment
+from .models import Article, Comment, Tag
 
 
 class ArticleIndexView(ListView):
     model = Article
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        getTags = self.request.GET.getlist('tags');
         context = super(ArticleIndexView, self).get_context_data()
-        context['filter_tags'] = self.request.GET.getlist('tags')
+        context['filter_tags'] = getTags
+        context['tags'] = Tag.objects.exclude(name__in=getTags)
         return context
 
     def get_queryset(self):
