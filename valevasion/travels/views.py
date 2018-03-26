@@ -1,3 +1,5 @@
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.views import View
@@ -9,11 +11,26 @@ from .forms.CommentForm import CommentForm
 from .models import Article, Comment, Tag
 
 
+def comment_delete(request, pk, article_pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('article-detail', article_pk)
+
+
+def comment_accept(request, pk, article_pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST':
+        comment.isAccepted = not comment.isAccepted
+        comment.save()
+        return redirect('article-detail', article_pk)
+
+
 class ArticleIndexView(ListView):
     model = Article
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        getTags = self.request.GET.getlist('tags');
+        getTags = self.request.GET.getlist('tags')
         context = super(ArticleIndexView, self).get_context_data()
         context['filter_tags'] = getTags
         context['tags'] = Tag.objects.exclude(name__in=getTags)
@@ -42,7 +59,7 @@ class ArticleDisplay(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(article=self.object.pk).filter(isAccepted=True).prefetch_related(
+        context['comments'] = Comment.objects.filter(article=self.object.pk).prefetch_related(
             'author')
         context['form'] = CommentForm()
         return context
@@ -61,7 +78,7 @@ class ArticleComment(SingleObjectMixin, FormView):
         if form.is_valid():
             c = Comment()
             c.body = form.cleaned_data['body']
-            c.isAccepted = True
+            c.isAccepted = False
             c.author = request.user
             c.article = self.object
             c.save()

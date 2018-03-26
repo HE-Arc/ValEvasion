@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['valevasion.srvz-webapp.he-arc.ch']
+ALLOWED_HOSTS = ['127.0.0.1', 'valevasion.srvz-webapp.he-arc.ch']
 
 # MailConfig
 
