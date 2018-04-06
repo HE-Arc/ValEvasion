@@ -125,9 +125,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('PASSWORD', os.getenv("DB_PASSWORD")),
         'HOST': os.environ.get('MYSQL_HOST', os.getenv("DB_HOST")),
         'PORT': os.environ.get('MYSQL_PORT', os.getenv("DB_PORT")),
-        #'NAME': 'django_db',
-        #'USER': 'root',
-        #'PASSWORD': 'root',
+
     }
 }
 
