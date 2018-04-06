@@ -5,75 +5,83 @@
 {% block title %}Nos Voyages{% endblock %}
 
 {% block content %}
-<div id="content">
-    <div class="ui container">
-        <div class="ui basic segment">
-            <form method="get" action="{% url 'articles' %}" class="ui form">
-                {% csrf_token %}
-                <div class="field">
-                    <select name="tags" multiple="" class="ui fluid dropdown">
-                        <option value="">Skills</option>
-                        {% for tag in tags.all %}
-                        <option value="{{ tag.name }}">{{ tag.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button class="ui button" type="submit">Submit</button>
-            </form>
-            {% for filter_tag in filter_tags %}
-            {{ filter_tag }}
-            {% endfor %}
-        </div>
-        <div class="ui basic segment">
-            <div class="ui special cards">
-                {% for article in article_list %}
-                <div class="card">
-                    <div class="blurring dimmable image">
-                        <img src="{{ MEDIA_URL }}{{ article.image }}">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus
-                                        de
-                                        détails</a>
+    <div id="content">
+        <div class="ui container">
+            <div class="ui basic segment">
+                <form method="get" action="{% url 'articles' %}" class="ui form">
+                    {% csrf_token %}
+                    <div class="field">
+                        <select name="tags" multiple="" class="ui fluid dropdown">
+                            <option value="">Plage, Neige, ...</option>
+                            {% for tag in tags.all %}
+                                <option value="{{ tag.name }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="ui button" type="submit">Submit</button>
+                </form>
+                {% for filter_tag in filter_tags %}
+                    {{ filter_tag }}
+                {% endfor %}
+            </div>
+            <div class="ui basic segment">
+                <div class="ui special cards">
+                    {% for article in article_list %}
+                        <div class="card">
+                            {% if request.user.is_superuser %}
+                                <div class="floating ui large left black label">
+                                    {{ article.comments.count }}
+                                </div>
+                            {% endif %}
+                            <div class="blurring dimmable image">
+                                <img src="{{ MEDIA_URL }}{{ article.image }}">
+                                <div class="ui dimmer">
+                                    <div class="content">
+                                        <div class="center">
+                                            <a href="{% url 'article-detail' article.id %}" class="ui inverted button">Plus
+                                                de
+                                                détails</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="content">
+                                <a class="header" href="{% url 'article-detail' article.id %}">{{ article.title }}</a>
+                                <div class="meta">
+                                    <span class="date">Poster le {{ article.pub_date.date }}</span>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i class="tags icon"></i>
+                                    {% for tag in article.tags.all %}
+                                        <a href="#">{{ tag.name }}</a>
+                                    {% endfor %}
+                                </a>
+                                <a class="ui green label" href="/admin/travels/article/{{ article.pk }}/change/">
+                                    <i class="edit icon"></i>
+                                </a>
+                                <a class="ui red label" href="/admin/travels/article/{{ article.pk }}/delete/">
+                                    <i class="trash icon"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="content">
-                        <a class="header" href="{% url 'article-detail' article.id %}">{{ article.title }}</a>
-                        <div class="meta">
-                            <span class="date">Poster le {{ article.pub_date.date }}</span>
+                    {% empty %}
+                        <div class="ui large label">
+                            <p>Pas de voyage pour le moment</p>
                         </div>
-                        <div class="description">
-                            {{ article.description|safe }}
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <a>
-                            <i class="tags icon"></i>
-                            {% for tag in article.tags.all %}
-                            <a href="#">{{ tag.name }}</a>
-                            {% endfor %}
-                        </a>
-                    </div>
+                    {% endfor %}
                 </div>
-                {% empty %}
-                <div class="ui large label">
-                    <p>Pas de voyage pour le moment</p>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </div>
-</div>
-<script>
-    $('.special.cards .image').dimmer({
-        on: 'hover'
-    });
+    <script>
+        $('.special.cards .image').dimmer({
+            on: 'hover'
+        });
 
-    function addTag(name) {
-        alert(name);
-    }
-</script>
+        function addTag(name) {
+            alert(name);
+        }
+    </script>
 {% endblock %}
