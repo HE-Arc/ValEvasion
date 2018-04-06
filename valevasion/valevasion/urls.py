@@ -21,11 +21,9 @@ from django.urls import path, include
 from . import settings
 from . import views
 from filebrowser.sites import site
-from photologue.sitemaps import GallerySitemap, PhotoSitemap
 
 sitemaps = {
-    'photologue_galleries': GallerySitemap,
-    'photologue_photos': PhotoSitemap,
+
 }
 
 urlpatterns = [
@@ -39,7 +37,6 @@ urlpatterns = [
     path('', include('users.urls')),
     path('contact/', include('mail.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('photologue/', include('photologue.urls', namespace='photologue'))
 ]
 
 

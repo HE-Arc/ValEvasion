@@ -1,0 +1,10 @@
+{% extends 'valevasion/base.html' %}
+
+{% block content %}
+<div id="content">
+  <form action="" method="post" class="ui form">{% csrf_token %}
+      {{ form.as_p }}
+      <input class="ui button" type="submit" value="Créer la galerie" />
+  </form>
+</div>
+{% endblock %}

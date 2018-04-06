@@ -70,7 +70,6 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount.providers.instagram',
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.github',
-    'photologue',
     'sortedm2m',
 )
 
@@ -126,6 +125,9 @@ DATABASES = {
         'PASSWORD': os.environ.get('PASSWORD', ''),
         'HOST': os.environ.get('MYSQL_HOST', '127.0.0.1'),
         'PORT': os.environ.get('MYSQL_PORT', '3306'),
+        #'NAME': 'django_db',
+        #'USER': 'root',
+        #'PASSWORD': 'root',
     }
 }
 

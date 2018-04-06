@@ -1,0 +1,22 @@
+{% extends 'valevasion/base.html' %}
+
+{% load static %}
+
+{% block title %}Nos Voyages{% endblock %}
+
+{% block content %}
+<div id="content">
+  <h1>Galerie</h1>
+  <ul>
+    {% for gallery in object_list %}
+        <li><a href="{% url 'gallery-detail' gallery.id %}"> {{ gallery.title }}</a></li>
+    {% empty %}
+      <h3>Pas de galerie pour le moment.</h3>
+    {% endfor %}
+  </ul>
+
+  <a class="ui button" href="{% url 'add-gallery' %}">
+    Ajouter une galerie
+  </a>
+</div>
+{% endblock %}

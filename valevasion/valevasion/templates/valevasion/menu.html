@@ -6,8 +6,8 @@
             <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %} item" href="{% url 'home' %}">Accueil</a>
             <a class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %} item"
                href="{% url 'articles' %}">Nos voyages</a>
-            <a class="{% if request.resolver_match.url_name == 'photologue:gallery-list' %}active{% endif %} item"
-               href="{% url 'photologue:gallery-list' %}">Gallerie</a>
+               <a class="{% if request.resolver_match.url_name == 'gallerys' %}active{% endif %} item"
+                 href="{% url 'gallerys' %}"> Galerie</a>
             <a class="{% if request.resolver_match.url_name == 'mail-new' %}active{% endif %} item"
                href="{% url 'mail-new' %}">Contact</a>
             <div class="right menu">
@@ -45,8 +45,8 @@
                    href="{% url 'home' %}"> Accueil</a>
                 <a class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %} item"
                    href="{% url 'articles' %}"> Nos voyages</a>
-                <a class="{% if request.resolver_match.url_name == 'photologue:gallery-list' %}active{% endif %} item"
-                   href="{% url 'photologue:gallery-list' %}"> Gallerie</a>
+                   <a class="{% if request.resolver_match.url_name == 'gallerys' %}active{% endif %} item"
+                 href="{% url 'gallerys' %}"> Galerie</a>
                 <a class="{% if request.resolver_match.url_name == 'mail-new' %}active{% endif %} item"
                    href="{% url 'mail-new' %}"> Contact</a>
                 {% if user.is_authenticated %}
