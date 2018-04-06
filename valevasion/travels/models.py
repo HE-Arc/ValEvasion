@@ -23,6 +23,7 @@ class Article(models.Model):
     pub_date = models.DateTimeField('date published')
     update = models.DateTimeField(auto_now=True, auto_now_add=False)
     tags = models.ManyToManyField(Tag, related_name='articles')
+    gallery_article = models.ForeignKey('Gallery',blank=True, null=True, on_delete=models.CASCADE, default=1, related_name='gallery_article')
 
     def __str__(self):
         return self.title
@@ -43,3 +44,10 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-pub_date',)
+
+class Gallery(models.Model):
+    title = models.CharField(max_length = 255)
+
+class Image(models.Model):
+    img = models.ImageField()
+    gallery = models.ForeignKey('Gallery', on_delete=models.CASCADE, default=1, related_name='gallery')

@@ -8,7 +8,9 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormView
 
 from .forms.CommentForm import CommentForm
-from .models import Article, Comment, Tag
+from .forms.GalleryForm import GalleryForm
+from .forms.ImageForm import ImageForm
+from .models import Article, Comment, Tag, Gallery, Image
 
 
 def comment_delete(request, pk, article_pk):
@@ -88,3 +90,51 @@ class ArticleComment(SingleObjectMixin, FormView):
 
     def get_success_url(self):
         return reverse('article-detail', kwargs={'pk': self.object.pk})
+
+class GalleryIndexView(ListView):
+     model = Gallery
+
+class GalleryDetailView(DetailView):
+     model = Gallery
+
+class GalleryFormView(FormView):
+    model = Gallery
+    template_name = 'travels/gallery_form.html'
+    form_class = GalleryForm
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        form = self.get_form()
+        if form.is_valid():
+            g = Gallery()
+            g.title = form.cleaned_data['title']
+            g.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('gallerys')
+
+class ImageFormView(FormView):
+    model = Image
+    template_name = 'travels/image_form.html'
+    form_class = ImageForm
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        form = self.get_form()
+        g = Gallery.objects.get(pk=kwargs['pk'])
+        if form.is_valid():
+            i = Image()
+            i.img = form.cleaned_data['img']
+            i.gallery = g
+            i.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('gallerys')

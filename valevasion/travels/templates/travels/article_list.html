@@ -58,12 +58,14 @@
                                         <a href="#">{{ tag.name }}</a>
                                     {% endfor %}
                                 </a>
+                            {% if request.user.is_superuser %}
                                 <a class="ui green label" href="/admin/travels/article/{{ article.pk }}/change/">
                                     <i class="edit icon"></i>
                                 </a>
                                 <a class="ui red label" href="/admin/travels/article/{{ article.pk }}/delete/">
                                     <i class="trash icon"></i>
                                 </a>
+                            {% endif %}
                             </div>
                         </div>
                     {% empty %}

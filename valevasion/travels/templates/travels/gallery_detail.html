@@ -1,0 +1,26 @@
+{% extends 'valevasion/base.html' %}
+
+{% block title %}Details | {{ gallery.title }}{% endblock %}
+
+{% block content %}
+    <div id="content">
+      <div class="ui card">
+        <div class="ui slide masked reveal image">
+          <img src= "{{ MEDIA_URL }}{{ image.img }}" class="visible content">
+        </div>
+      </div>
+
+      {% for image in Gallery.gallery.all %}
+      <div class="ui card">
+        <div class="ui slide masked reveal image">
+          <img src= "{{ MEDIA_URL }}{{ image.img }}" class="visible content">
+        </div>
+      </div>
+      {% empty %}
+        <h3>Pas de photo dans cette galerie pour le moment.</h3>
+      {% endfor %}
+      <a class="ui button" href="{% url 'add-image' gallery.id %}">
+        Ajouter une photo dans cette galerie
+      </a>
+    </div>
+{% endblock %}
