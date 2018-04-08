@@ -33,7 +33,7 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
-    body = models.CharField(max_length=255)
+    body = models.CharField(max_length=255, verbose_name="Message")
     isAccepted = models.BooleanField(default=False)
     pub_date = models.DateTimeField('date published', auto_now=True, auto_now_add=False)
     article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments')

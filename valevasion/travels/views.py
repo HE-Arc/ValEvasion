@@ -63,6 +63,7 @@ class ArticleDisplay(DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(article=self.object.pk).prefetch_related(
             'author')
+        context['user_invalidates_comments_count'] = Comment.objects.filter(author=self.request.user, isAccepted=False).count()
         context['form'] = CommentForm()
         return context
 
