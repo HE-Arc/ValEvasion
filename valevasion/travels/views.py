@@ -102,6 +102,11 @@ class GalleryIndexView(ListView):
 class GalleryDetailView(DetailView):
     model = Gallery
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = Image.objects.filter(gallery=self.object.pk)
+        return context
+
 
 class GalleryFormView(FormView):
     model = Gallery

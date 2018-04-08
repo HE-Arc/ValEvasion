@@ -2,9 +2,13 @@
 
 {% block content %}
 <div id="content">
-  <form enctype="multipart/form-data" action="" method="post" class="ui form">{% csrf_token %}
-    {{ form.as_p }}
-    <input class="ui button" type="submit" value="Ajouter l'image" />
-  </form>
+    <div class="ui container">
+        <div class="ui basic segment">
+            <form enctype="multipart/form-data" action="" method="post" class="ui form">{% csrf_token %}
+                {{ form.as_p }}
+                <input class="ui button" type="submit" value="Ajouter l'image"/>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
