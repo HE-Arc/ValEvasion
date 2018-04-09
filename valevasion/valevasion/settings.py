@@ -67,8 +67,6 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.instagram',
-    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.github',
     'sortedm2m',
 )
