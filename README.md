@@ -17,3 +17,6 @@ Project for a travel agency website
 [CSS - Semantic-UI](https://semantic-ui.com) <br>
 [Python - Django](https://www.djangoproject.com) <br>
 [add more]
+
+## Presentation link
+http://slides.com/johnnydacosta/val-evasion 
