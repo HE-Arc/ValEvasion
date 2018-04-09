@@ -63,6 +63,9 @@ class ArticleDisplay(DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(article=self.object.pk).prefetch_related(
             'author')
+        if self.request.user.is_authenticated:
+            context['user_invalidates_comments_count'] = Comment.objects.filter(author=self.request.user,
+                                                                                isAccepted=False).count()
         context['form'] = CommentForm()
         return context
 
@@ -91,11 +94,19 @@ class ArticleComment(SingleObjectMixin, FormView):
     def get_success_url(self):
         return reverse('article-detail', kwargs={'pk': self.object.pk})
 
+
 class GalleryIndexView(ListView):
-     model = Gallery
+    model = Gallery
+
 
 class GalleryDetailView(DetailView):
-     model = Gallery
+    model = Gallery
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = Image.objects.filter(gallery=self.object.pk)
+        return context
+
 
 class GalleryFormView(FormView):
     model = Gallery
@@ -116,6 +127,7 @@ class GalleryFormView(FormView):
 
     def get_success_url(self):
         return reverse('gallerys')
+
 
 class ImageFormView(FormView):
     model = Image

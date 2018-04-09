@@ -1,0 +1,71 @@
+{% extends 'users/account_base.html' %}
+{% block content %}
+
+<div class="ui grid">
+    <div class="row">
+        <h1 class="ui huge header">
+            Mes commentaires
+        </h1>
+    </div>
+    <div class="ui divider"></div>
+    <div class="row">
+        <div class="content">
+            <div class="ui text container">
+                <h2>Commentaires en attente de validations</h2>
+                {% for comment in comments %}
+                {% if not comment.isAccepted%}
+                <div class="ui stackable 4 column grid">
+                    <div class="column">
+                        <div class="ui tall stacked segment">
+                            <form action="{% url 'article-detail' comment.article.pk %}"
+                                  method="get">
+                                {% csrf_token %}
+                                <a class="ui green left corner label" onclick="parentNode.submit();">
+                                    <i class="eye icon"></i>
+                                </a>
+                            </form>
+                            <form action="{% url 'update-comment' comment.pk comment.article.pk %}" method="post">
+                                {% csrf_token %}
+                                <a class="ui red right corner label" onclick="parentNode.submit();">
+                                    <i class="trash icon"></i>
+                                </a>
+                            </form>
+                            <h4 class="ui header">{{ comment.author }}</h4>
+                            <p>{{ comment.body }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <h2>Commentaires validés</h2>
+                {% for comment in comments %}
+                {% if comment.isAccepted%}
+                <div class="ui stackable 4 column grid">
+                    <div class="column">
+                        <div class="ui tall stacked segment">
+                            <form action="{% url 'article-detail' comment.article.pk %}"
+                                  method="get">
+                                {% csrf_token %}
+                                <a class="ui green left corner label" onclick="parentNode.submit();">
+                                    <i class="eye icon"></i>
+                                </a>
+                            </form>
+                            <form action="{% url 'update-comment' comment.pk comment.article.pk %}" method="post">
+                                {% csrf_token %}
+                                <a class="ui red right corner label" onclick="parentNode.submit();">
+                                    <i class="trash icon"></i>
+                                </a>
+                            </form>
+                            <h4 class="ui header">{{ comment.author }}</h4>
+                            <p>{{ comment.body }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+
+from travels.models import Comment
 from .forms import EditProfileForm
 from django.shortcuts import redirect
+
 
 @login_required
 def index(request):
@@ -14,6 +17,7 @@ def index(request):
         form = EditProfileForm(instance=request.user)
     return render(request, 'users/account_home.html', {'form': form})
 
+
 @login_required
 def travels(request):
     return render(request, 'users/account_travels.html')
@@ -22,3 +26,9 @@ def travels(request):
 @login_required
 def settings(request):
     return render(request, 'users/account_settings.html')
+
+
+@login_required
+def comments(request):
+    my_comments = Comment.objects.filter(author=request.user)
+    return render(request, 'users/account_comments.html', {'comments': my_comments})

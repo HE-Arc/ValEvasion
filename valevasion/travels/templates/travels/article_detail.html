@@ -3,112 +3,137 @@
 {% block title %}Details | {{ article.title }}{% endblock %}
 
 {% block content %}
-    <div id="content">
-        <div class="ui text container">
-            <div class="ui one cards">
-                <a class=" black card">
-                    <div class="image">
-                        <img class="ui fluid image" src="{{ MEDIA_URL }}{{ article.image }}">
-                    </div>
-                </a>
-            </div>
-
-            <h1 class="ui center aligned header">
-                {{ article.title }} <br>
-                <a href="#" class="ui primary button">Je veux réserver !</a>
-            </h1>
-
-            <div class="ui section divider"></div>
-            <h3 class="ui center aligned icon header">
-                <i class="circular plane icon"></i>
-            </h3>
-            <h3 class="ui header center aligned">Desciptions détailées de votre voyage !</h3>
-
-            {{ article.description|safe }}</p>
-
-            <div class="ui section divider"></div>
-            <h3 class="ui center aligned icon header">
-                <i class="circular money icon"></i>
-            </h3>
-
-            <h3 class="ui header center aligned">Prix de votre voyage!</h3>
-            <div class="ui  massive black labels">
-                <div class="ui label middle aligned">
-                    {{ article.price }} CHF
+<div id="content">
+    <div class="ui text container">
+        <div class="ui one cards">
+            <a class=" black card">
+                <div class="image">
+                    <img class="ui fluid image" src="{{ MEDIA_URL }}{{ article.image }}">
                 </div>
+            </a>
+        </div>
+
+        <h1 class="ui center aligned header">
+            {{ article.title }} <br>
+            <a href="#" class="ui primary button">Je veux réserver !</a>
+        </h1>
+
+        <div class="ui section divider"></div>
+        <h3 class="ui center aligned icon header">
+            <i class="circular plane icon"></i>
+        </h3>
+        <h3 class="ui header center aligned">Desciptions détailées de votre voyage !</h3>
+
+        {{ article.description|safe }}</p>
+
+        <div class="ui section divider"></div>
+        <h3 class="ui center aligned icon header">
+            <i class="circular money icon"></i>
+        </h3>
+
+        <h3 class="ui header center aligned">Prix de votre voyage!</h3>
+        <div class="ui  massive black labels">
+            <div class="ui label middle aligned">
+                {{ article.price }} CHF
             </div>
+        </div>
 
-            <div class="ui section divider"></div>
-            <h2 class="ui header center aligned">Tags</h2>
+        <div class="ui section divider"></div>
+        <h2 class="ui header center aligned">Tags</h2>
 
-            <div class="ui compact menu">
-                {% for tag in article.tags.all %}
-                    <a class="item">
-                        <i class="tag icon"></i>
-                        {{ tag.name }}
-                    </a>
-                {% endfor %}
-            </div>
+        <div class="ui compact menu">
+            {% for tag in article.tags.all %}
+            <a class="item">
+                <i class="tag icon"></i>
+                {{ tag.name }}
+            </a>
+            {% endfor %}
+        </div>
 
-            <div class="ui section divider"></div>
-            <h2 class="ui header center aligned">Commentaires</h2>
-
+        <div class="ui section divider"></div>
+        <h2 class="ui header center aligned">Commentaires</h2>
+        {% if user.is_authenticated %}
+        <div class="ui form">
             <form method="post" action="{% url 'article-detail' article.pk %}">
                 {% csrf_token %}
                 {{ form }}
+                <br><br>
                 <button type="submit" class="ui primary button">Envoi</button>
             </form>
-
-            {% for comment in comments %}
-                {% if request.user.is_superuser or comment.isAccepted %}
-                    <div class="ui stackable 4 column grid">
-                        <div class="column">
-                            <div class="ui tall stacked segment">
-                                {% if request.user.is_superuser %}
-                                    {% if comment.isAccepted %}
-                                        <form action="{% url 'update-comment' comment.pk article.pk %}" method="post">
-                                            {% csrf_token %}
-                                            <a class="ui red right corner label" onclick="parentNode.submit();">
-                                                <i class="trash icon"></i>
-                                            </a>
-                                        </form>
-
-                                        <form action="{% url 'update-comment-accept' comment.pk article.pk %}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <a class="ui green left corner label" onclick="parentNode.submit();">
-                                                <i class="eye icon"></i>
-                                            </a>
-                                        </form>
-                                    {% else %}
-                                        <form action="{% url 'update-comment' comment.pk article.pk %}" method="post">
-                                            {% csrf_token %}
-                                            <a class="ui red right corner label" onclick="parentNode.submit();">
-                                                <i class="trash icon"></i>
-                                            </a>
-                                        </form>
-                                        <form action="{% url 'update-comment-accept' comment.pk article.pk %}"
-                                              method="post">
-                                            {% csrf_token %}
-                                            <a class="ui red left corner label" onclick="parentNode.submit();">
-                                                <i class="eye slash icon"></i>
-                                            </a>
-                                        </form>
-                                    {% endif %}
-                                {% endif %}
-                                <h4 class="ui header">{{ comment.author }}</h4>
-                                <p>{{ comment.body }}</p>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% empty %}
-                <div class="ui tall stacked segment">
-                    <h4 class="ui header">Pas de commentaire pour le moment...</h4>
-                    <a href="" class="ui btn-primary">Laisser un commentaire</a>
-                </div>
-            {% endfor %}
-
         </div>
+        {% if user_invalidates_comments_count > 0 %}
+        <div class="ui icon message">
+            <i class="inbox icon"></i>
+            <div class="content">
+                <div class="header">
+                    Vous avez des commentaires en attente de validation
+                </div>
+                <p><a href="{% url 'account_comments' %}">Voir mes commentaires en attente de validation</a></p>
+            </div>
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="ui icon message">
+            <i class="info icon"></i>
+            <div class="content">
+                <div class="header">
+                    Seul les membres peuvent poster un commentaire
+                </div>
+                <p><a href="{% url 'account_login' %}">Veuillez vous identifier si vous voulez laisser un commentaire</a></p>
+            </div>
+        </div>
+        {% endif %}
+        <br><br>
+        {% for comment in comments %}
+        {% if request.user.is_superuser or comment.isAccepted %}
+        <div class="ui stackable 4 column grid">
+            <div class="column">
+                <div class="ui tall stacked segment">
+                    {% if request.user.is_superuser %}
+                    {% if comment.isAccepted %}
+                    <form action="{% url 'update-comment' comment.pk article.pk %}" method="post">
+                        {% csrf_token %}
+                        <a class="ui red right corner label" onclick="parentNode.submit();">
+                            <i class="trash icon"></i>
+                        </a>
+                    </form>
+
+                    <form action="{% url 'update-comment-accept' comment.pk article.pk %}"
+                          method="post">
+                        {% csrf_token %}
+                        <a class="ui green left corner label" onclick="parentNode.submit();">
+                            <i class="eye icon"></i>
+                        </a>
+                    </form>
+                    {% else %}
+                    <form action="{% url 'update-comment' comment.pk article.pk %}" method="post">
+                        {% csrf_token %}
+                        <a class="ui red right corner label" onclick="parentNode.submit();">
+                            <i class="trash icon"></i>
+                        </a>
+                    </form>
+                    <form action="{% url 'update-comment-accept' comment.pk article.pk %}"
+                          method="post">
+                        {% csrf_token %}
+                        <a class="ui red left corner label" onclick="parentNode.submit();">
+                            <i class="eye slash icon"></i>
+                        </a>
+                    </form>
+                    {% endif %}
+                    {% endif %}
+                    <h4 class="ui header">{{ comment.author }}</h4>
+                    <p>{{ comment.body }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <div class="ui tall stacked segment">
+            <h4 class="ui header">Pas de commentaire pour le moment...</h4>
+            <a href="" class="ui btn-primary">Laisser un commentaire</a>
+        </div>
+        {% endfor %}
+
     </div>
+</div>
 {% endblock %}

@@ -6,26 +6,33 @@
 
 {% block content %}
 <div id="content">
-  <h1>Galeries</h1>
-  <ul>
-    {% for gallery in object_list %}
-      <div class="ui middle aligned animated list">
-      <div class="item">
-        <i class="folder icon"></i>
-        <div class="content">
-          <a href="{% url 'gallery-detail' gallery.id %}"><h2>{{ gallery.title }}</h2></a>
+    <div class="ui container">
+        <div class="ui basic segment">
+            <h1>Galerie</h1>
+            <ul>
+                {% for gallery in object_list %}
+                <div class="ui card">
+                    <a class="image" href="{% url 'gallery-detail' gallery.id %}">
+                        <img src="{{MEDIA_URL}}static/plane.jpg"">
+                    </a>
+                    <div class="content">
+                        <a class="header" href="{% url 'gallery-detail' gallery.id %}">{{ gallery.title }}</a>
+                        <div class="meta">
+                            <a>{{ gallery.gallery.count}} images</a>
+                        </div>
+                    </div>
+                </div>
+                <!--<li><a href="{% url 'gallery-detail' gallery.id %}"> {{ gallery.title }}</a></li>-->
+                {% empty %}
+                <h3>Pas de galerie pour le moment.</h3>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated %}
+            <a class="ui button" href="{% url 'add-gallery' %}">
+                Ajouter une galerie
+            </a>
+            {% endif %}
         </div>
-      </div>
     </div>
-
-    {% empty %}
-      <h3>Pas de galerie pour le moment.</h3>
-    {% endfor %}
-  </ul>
-{% if user.is_authenticated %}
-  <a class="ui button" href="{% url 'add-gallery' %}">
-    Ajouter une galerie
-  </a>
-{% endif %}
 </div>
 {% endblock %}

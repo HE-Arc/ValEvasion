@@ -6,14 +6,18 @@
             <a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %} item" href="{% url 'home' %}">Accueil</a>
             <a class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %} item"
                href="{% url 'articles' %}">Nos voyages</a>
-               <a class="{% if request.resolver_match.url_name == 'gallerys' %}active{% endif %} item"
-                 href="{% url 'gallerys' %}"> Galerie</a>
+            <a class="{% if request.resolver_match.url_name == 'gallerys' %}active{% endif %} item"
+               href="{% url 'gallerys' %}"> Galerie</a>
             <a class="{% if request.resolver_match.url_name == 'mail-new' %}active{% endif %} item"
                href="{% url 'mail-new' %}">Contact</a>
             <div class="right menu">
                 {% if user.is_authenticated %}
                 <div class="ui simple dropdown item">{{ user.get_username }}<i class="dropdown icon"></i>
                     <div class="menu">
+                        {% if user.is_superuser %}
+                        <a class="item" href="/admin"> <i class="server icon"></i>Admninistration</a>
+                        <div class="ui divider"></div>
+                        {% endif %}
                         <a class=" {% if request.resolver_match.url_name == 'account_home' %}active{% endif %} item"
                            href="{% url 'account_home' %}"> <i class="user icon"></i>Mon compte</a>
                         <a class="{% if request.resolver_match.url_name == 'account_travels' %}active{% endif %} item"
@@ -45,8 +49,8 @@
                    href="{% url 'home' %}"> Accueil</a>
                 <a class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %} item"
                    href="{% url 'articles' %}"> Nos voyages</a>
-                   <a class="{% if request.resolver_match.url_name == 'gallerys' %}active{% endif %} item"
-                 href="{% url 'gallerys' %}"> Galerie</a>
+                <a class="{% if request.resolver_match.url_name == 'gallerys' %}active{% endif %} item"
+                   href="{% url 'gallerys' %}"> Galerie</a>
                 <a class="{% if request.resolver_match.url_name == 'mail-new' %}active{% endif %} item"
                    href="{% url 'mail-new' %}"> Contact</a>
                 {% if user.is_authenticated %}
@@ -55,6 +59,10 @@
                         {{ user.get_username }}<i class="dropdown icon"></i>
                     </div>
                     <div class="content">
+                        {% if user.is_superuser %}
+                        <a class="item" href="/admin"> <i class="server icon"></i>Admninistration</a>
+                        <div class="ui divider"></div>
+                        {% endif %}
                         <a class="{% if request.resolver_match.url_name == 'account_home' %}active{% endif %} item"
                            href="{% url 'account_home' %}"> <i class="user icon"></i>Mon compte</a>
                         <a class="{% if request.resolver_match.url_name == 'account_travels' %}active{% endif %} item"

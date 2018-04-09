@@ -3,26 +3,52 @@
 {% block title %}Details | {{ gallery.title }}{% endblock %}
 
 {% block content %}
-    <div id="content">
-      <div class="ui card">
-        <div class="ui slide masked reveal image">
-          <img src= "{{ MEDIA_URL }}{{ image.img }}" class="visible content">
+<div id="content">
+    <div class="ui container">
+        <h2 class="ui center aligned icon header">
+            {{ gallery.title}}
+        </h2>
+        <div class="ui basic segment">
+            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            {% for image in images %}
+            <li>
+                <img class="mySlides" src="{{ MEDIA_URL }}{{ image.img }}" style="width:100%"/>
+            </li>
+            {% empty %}
+            <h3>Pas de photo dans cette galerie pour le moment.</h3>
+            {% endfor %}
+            {% if user.is_authenticated %}
+            <a class="ui button" href="{% url 'add-image' gallery.id %}">
+                Ajouter une photo dans cette galerie
+            </a>
+            {% endif %}
         </div>
-      </div>
-
-      {% for image in Gallery.gallery.all %}
-      <div class="ui card">
-        <div class="ui slide masked reveal image">
-          <img src= "{{ MEDIA_URL }}{{ image.img }}" class="visible content">
-        </div>
-      </div>
-      {% empty %}
-        <h3>Pas de photo dans cette galerie pour le moment.</h3>
-      {% endfor %}
-      {% if user.is_authenticated %}
-        <a class="ui button" href="{% url 'add-image' gallery.id %}">
-          Ajouter une photo dans cette galerie
-        </a>
-      {% endif %}
     </div>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = x.length
+        }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+</script>
+
 {% endblock %}

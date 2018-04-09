@@ -35,6 +35,8 @@
                    href="{% url 'account_home' %}">Mon profile</a>
                 <a class="{% if request.resolver_match.url_name == 'account_travels' %}active{% endif %} item"
                    href="{% url 'account_travels' %}">Mes voyages</a>
+                 <a class="{% if request.resolver_match.url_name == 'account_comments' %}active{% endif %} item"
+                   href="{% url 'account_comments' %}">Mes commentaires</a>
                 <div class="ui hidden divider"></div>
                 <a class="{% if request.resolver_match.url_name == 'account_settings' %}active{% endif %} item"
                    href="{% url 'account_settings' %}">Paramètres</a>
