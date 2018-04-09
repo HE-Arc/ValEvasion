@@ -15,7 +15,6 @@ django-countries==5.1.1
 django-debug-toolbar==1.9.1
 django-filebrowser-no-grappelli==3.7.4
 django-generate-secret-key==1.0.2
-django-photologue==3.8.1
 django-sortedm2m==1.5.0
 django-templated-mail==1.1.1
 django-tinymce==2.7.0

@@ -6,17 +6,26 @@
 
 {% block content %}
 <div id="content">
-  <h1>Galerie</h1>
+  <h1>Galeries</h1>
   <ul>
     {% for gallery in object_list %}
-        <li><a href="{% url 'gallery-detail' gallery.id %}"> {{ gallery.title }}</a></li>
+      <div class="ui middle aligned animated list">
+      <div class="item">
+        <i class="folder icon"></i>
+        <div class="content">
+          <a href="{% url 'gallery-detail' gallery.id %}"><h2>{{ gallery.title }}</h2></a>
+        </div>
+      </div>
+    </div>
+
     {% empty %}
       <h3>Pas de galerie pour le moment.</h3>
     {% endfor %}
   </ul>
-
+{% if user.is_authenticated %}
   <a class="ui button" href="{% url 'add-gallery' %}">
     Ajouter une galerie
   </a>
+{% endif %}
 </div>
 {% endblock %}
