@@ -137,6 +137,7 @@ class ImageFormView(FormView):
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return HttpResponseForbidden()
+
         form = self.get_form()
         g = Gallery.objects.get(pk=kwargs['pk'])
         if form.is_valid():

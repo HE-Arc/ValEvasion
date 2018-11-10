@@ -118,3 +118,10 @@ valevasion/secret_config.py
 /static/*
 .directory
 /staticfiles/*
+
+
+# virtual Environments
+/bin
+/include
+/lib
+pyvenv.cfg

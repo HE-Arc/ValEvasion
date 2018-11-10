@@ -29,8 +29,10 @@
                     {% endfor %}
                 </div>
             </ul>
+
             {% if user.is_authenticated %}
-            <a class="ui button" href="{% url 'add-gallery' %}">
+            <br>
+            <a class="ui blue button" href="{% url 'add-gallery' %}">
                 Ajouter une galerie
             </a>
             {% endif %}
