@@ -72,7 +72,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'travels.apps.TravelsConfig',
+    'travels',
     'valevasion',
     'users',
     'mail',

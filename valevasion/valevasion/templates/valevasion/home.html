@@ -11,43 +11,217 @@
         </div>
     </div>
 </div>
-<div class="ui center aligned container">
-    <h1 class="title-name">Val-Evasion</h1>
+
+
+{% if infos %}
+<div id="carousel">
+    <div class="btn-bar">
+        <div id="buttons"><a id="prev" href="#"><</a><a id="next" href="#">></a></div>
+    </div>
+    <div id="slides">
+        <ul>
+            {% for info in infos%}
+            {% if info.isShow %}
+            <li class="slide">
+                <div class="quoteContainer">
+                    <p class="quote-phrase">
+                        {{ info.title }} : {{ info.description }}
+                    </p>
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 </div>
-<div class="ui container">
-    <div class="ui two column stackable grid">
-        <div class="column">
-            <div class="ui basic segment">
-                <h3>Un voyage qui nous correspond</h3>
-                <p>Nous efforçons de trouver les meilleurs voyage avec les meilleurs prix!</p>
+<bR>
+{% endif %}
+
+
+<div class="ui container" id="info">
+
+    <div class="ui center aligned container">
+        <h1 class="title-name">Val-Evasion</h1>
+    </div>
+
+    <div class="ui container">
+        <div class="ui two column stackable grid">
+            <div class="column">
+                <div class="ui basic segment">
+                    <h3>Un voyage qui nous correspond</h3>
+                    <p>Nous efforçons de trouver les meilleurs voyage avec les meilleurs prix!</p>
+                </div>
+                <div class="ui basic segment">
+                    <h3>Nous nous occupons de tout!</h3>
+                    <p>Réservation du billet d'avion, réservation de l'hôtel et transport jusquà votre hôtel!</p>
+                </div>
             </div>
-            <div class="ui basic segment">
-                <h3>Nous nous occupons de tout!</h3>
-                <p>Réservation du billet d'avion, réservation de l'hôtel et transport jusquà votre hôtel!</p>
+            <div class="column">
+                <img class="ui large rounded image" src="{{MEDIA_URL}}static/plane.jpg">
             </div>
         </div>
-        <div class="column">
-            <img class="ui large rounded image" src="{{MEDIA_URL}}static/plane.jpg">
+        <div class="ui center aligned basic segment">
+            <a class="ui huge button" href="{% url 'articles' %}">Voir nos offres de voyages</a>
         </div>
     </div>
-    <div class="ui center aligned basic segment">
-        <a class="ui huge button" href="{% url 'articles' %}">Voir nos offres de voyages</a>
+    <div class="ui two column stackable celled grid center aligned">
+        <div class="column">
+            <h3>"Incroyable expérience!"</h3>
+            <p>Ce qui se dit à propos de nous</p>
+        </div>
+        <div class="column">
+            <h3>"Excellente agence de voyage" </h3>
+        </div>
     </div>
-</div>
-<div class="ui two column stackable celled grid center aligned">
-    <div class="column">
-        <h3>"Incroyable expérience!"</h3>
-        <p>Ce qui se dit à propos de nous</p>
+    <div class="ui vertical stripe very padded segment">
+        <div class="ui center aligned text container">
+            <h3 class="ui header">Partagez votre expérience avec d'autres personnes</h3>
+            <p>Vous pouvez partager vos photos ou tout simplement laisser un commentaire sur votre voyage</p>
+            <a class="ui large button" href="{% url 'articles' %}">Je veux partager mon expérience</a>
+        </div>
     </div>
-    <div class="column">
-        <h3>"Excellente agence de voyage" </h3>
+    <br>
+    <div class="ui center aligned container">
+        Val-evasion travaille avec les principaux agents officiels tels que:<br><br>
+        <div class="ui horizontal list">
+            <div class="item">
+                <div class="content">
+                    <img class="ui tiny image" src="{{MEDIA_URL}}logo/hotelplan.png">
+                    <div class="header">Hotelplan</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui small image" src="{{MEDIA_URL}}logo/travelhouse.jpg">
+                    <div class="header">Travelhouse</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui tiny image" src="{{MEDIA_URL}}logo/tourisme-pour-tous.png">
+                    <div class="header">Tourisme Pour Tous</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui tiny image" src="{{MEDIA_URL}}logo/helvetic_tours.png">
+                    <div class="header">Helvetic Tours</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui small image" src="{{MEDIA_URL}}logo/Frantour.png">
+                    <div class="header">Frantour / Railtour</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui tiny image" src="{{MEDIA_URL}}logo/logo_universal.png">
+                    <div class="header">Universal</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui small image" src="{{MEDIA_URL}}logo/club_med.png">
+                    <div class="header">Club Méditeranée</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui tiny image" src="{{MEDIA_URL}}logo/fti.jpg">
+                    <div class="header">F.T.I.</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <img class="ui tiny image" src="{{MEDIA_URL}}logo/msc-croisier.jpg">
+                    <div class="header">Costa et MSC Croisières</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        etc...
     </div>
-</div>
-<div class="ui vertical stripe very padded segment">
-    <div class="ui center aligned text container">
-        <h3 class="ui header">Partagez votre expérience avec d'autres personnes</h3>
-        <p>Vous pouvez partager vos photos ou tout simplement laisser un commentaire sur votre voyage</p>
-        <a class="ui large button" href="{% url 'articles' %}">Je veux partager mon expérience</a>
-    </div>
+
+    <br>
+
+    <script>
+        $(document).ready(function () {
+            //rotation speed and timer
+            var speed = 5000;
+
+            var run = setInterval(rotate, speed);
+            var slides = $('.slide');
+            var container = $('#slides ul');
+            var elm = container.find(':first-child').prop("tagName");
+            var item_width = container.width();
+            var previous = 'prev'; //id of previous button
+            var next = 'next'; //id of next button
+            slides.width(item_width); //set the slides to the correct pixel width
+            container.parent().width(item_width);
+            container.width(slides.length * item_width); //set the slides container to the correct total width
+            container.find(elm + ':first').before(container.find(elm + ':last'));
+            resetSlides();
+
+
+            //if user clicked on prev button
+
+            $('#buttons a').click(function (e) {
+                //slide the item
+                if (slides.length == 1) {
+                return;
+                }
+                if (container.is(':animated')) {
+                    return false;
+                }
+                if (e.target.id == previous) {
+                    container.stop().animate({
+                        'left': 0
+                    }, 1500, function () {
+                        container.find(elm + ':first').before(container.find(elm + ':last'));
+                        resetSlides();
+                    });
+                }
+
+                if (e.target.id == next) {
+                    container.stop().animate({
+                        'left': item_width * -2
+                    }, 1500, function () {
+                        container.find(elm + ':last').after(container.find(elm + ':first'));
+                        resetSlides();
+                    });
+                }
+
+                //cancel the link behavior
+                return false;
+
+            });
+
+            //if mouse hover, pause the auto rotation, otherwise rotate it
+            container.parent().mouseenter(function () {
+                clearInterval(run);
+            }).mouseleave(function () {
+                run = setInterval(rotate, speed);
+            });
+
+
+            function resetSlides() {
+                if (slides.length != 1) {
+                    container.css({
+                        'left': -1 * item_width
+                    });
+                }
+                //and adjust the container so current is in the frame
+
+            }
+
+        });
+        //a simple function to click next link
+        //a timer will call this function, and the rotation will begin
+
+        function rotate() {
+            $('#next').click();
+        }
+    </script>
 </div>
 {% endblock %}

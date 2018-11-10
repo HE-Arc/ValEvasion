@@ -54,3 +54,13 @@ class Gallery(models.Model):
 class Image(models.Model):
     img = models.ImageField()
     gallery = models.ForeignKey('Gallery', on_delete=models.CASCADE, default=1, related_name='gallery')
+
+
+class Info(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    isShow = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
