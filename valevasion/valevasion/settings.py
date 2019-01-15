@@ -67,12 +67,11 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
     'sortedm2m',
 )
 
 LOCAL_APPS = (
-    'travels.apps.TravelsConfig',
+    'travels',
     'valevasion',
     'users',
     'mail',

@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
+from travels.models import Info
 # Create your views here.
 
 def index(request):
-    context = {}
-    return render(request, 'valevasion/home.html', context)
+    infos = Info.objects.all().filter(isShow = True)
+
+    return render(request, 'valevasion/home.html', {"infos" : infos})

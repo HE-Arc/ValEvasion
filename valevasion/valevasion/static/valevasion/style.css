@@ -1,8 +1,8 @@
-.medium-vertical-padding{
+.medium-vertical-padding {
     padding: 25px 0 25px 0 !important;
 }
 
-.small-vertical-padding{
+.small-vertical-padding {
     padding: 5px 0 5px 0 !important;
 }
 
@@ -16,21 +16,21 @@
     overflow: auto !important;
 }
 
-.title-name{
+.title-name {
     padding: 35px !important;
 }
 
-.sub-tile-header{
+.sub-tile-header {
     color: white;
 }
 
-#content{
+#content {
     margin-top: 100px !important;
     min-height: 100vh !important;
     padding-bottom: 50px !important;
 }
 
-.header-image{
+.header-image {
     background-image: url(/media/static/header.jpeg) !important;
     background-repeat: no-repeat;
     background-size: cover !important;
@@ -104,4 +104,96 @@
     display: none;
 }
 
+/********** Message Slider ***********/
 
+body {
+
+}
+
+#carousel {
+    background: #34495e;
+    position: relative;
+    margin: 0 auto;
+}
+
+#slides {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+
+#slides ul {
+    list-style: none;
+    width: 100%;
+    height: 250px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#slides li {
+    width: 100%;
+    height: 250px;
+    float: left;
+    text-align: center;
+    position: relative;
+    font-family: lato, sans-serif;
+}
+
+/* Styling for prev and next buttons */
+.btn-bar {
+    max-width: 346px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    top: -80px;
+    width: 100%;
+}
+
+#buttons {
+    padding: 0 0 5px 0;
+    float: right;
+}
+
+#buttons a {
+    text-align: center;
+    display: block;
+    font-size: 50px;
+    float: left;
+    outline: 0;
+    margin: 0 60px;
+    color: #b14943;
+    text-decoration: none;
+    display: block;
+    padding: 9px;
+    width: 35px;
+}
+
+a#prev:hover, a#next:hover {
+    color: #FFF;
+    text-shadow: .5px 0px #b14943;
+}
+
+.quote-phrase, .quote-author {
+    font-family: sans-serif;
+    font-weight: 300;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 5px 20px;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+
+.quote-phrase {
+    height: 200px;
+    font-size: 24px;
+    color: #FFF;
+    font-style: italic;
+    text-shadow: .5px 0px #b14943;
+}
+
+
+.quoteContainer, .authorContainer {
+    display: table;
+    width: 100%;
+}

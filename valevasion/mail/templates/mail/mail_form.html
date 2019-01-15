@@ -5,25 +5,56 @@
 {% block content %}
 <div id="content">
     <div class="ui container">
-      {% if user.is_authenticated %}
-      <h1>Envoyer un message </h1>
-      <div class="ui form">
-          <form action="" method="post">
-              {% csrf_token %}
-              {% for field in form %}
-              <div class="ui error message">
-                  {{field.errors}}
-              </div>
-              {{field.label}} {% if field.field.required %} * {% endif %}
-              {{field}}
-              {% endfor %}
-              <button class="ui button" type="submit"> Envoyer</button>
-          </form>
-      </div>
-      {% endif %}
-        <h1>Emplacement</h1>
+
+        <h1><i class="map marker alternate icon"></i> Emplacement</h1>
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10903.729465929177!2d6.5814754!3d46.9040485!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1e4fc8918653376!2sVal-Evasion+S.%C3%A0+r.l.!5e0!3m2!1sfr!2sch!4v1523181128245"
                 width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <br><br>
+        <h1><i class="paper plane outline  icon"></i> Nous contacter</h1>
+
+        <h1>Envoyer un message </h1>
+
+        {% if user.is_authenticated %}
+        <div class="ui form">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="ui error message">
+                    {{field.errors}}
+                </div>
+                {{field.label}} {% if field.field.required %} * {% endif %}
+                {{field}}
+                {% endfor %}
+                <br><br>
+                <button class="ui blue right floated button" type="submit"> Envoyer</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="ui form">
+            <div class="two fields">
+                <div class="field">
+                    <label>Nom</label>
+                    <input type="text" placeholder="Nom">
+                </div>
+                <div class="field">
+                    <label>E-mail</label>
+                    <input type="email" placeholder="E-mail">
+                </div>
+            </div>
+            <div class="field">
+                <label>Numéro de téléphone</label>
+                <input type="text" placeholder="Numéro de téléphone">
+            </div>
+            <div class="ui form">
+                <div class="field">
+                    <label>Message</label>
+                    <textarea></textarea>
+                </div>
+            </div>
+            <br>
+            <button class="ui blue right floated button" type="submit"> Envoyer</button>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
