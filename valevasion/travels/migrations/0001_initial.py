@@ -8,7 +8,6 @@ import tinymce.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -27,9 +26,13 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='')),
                 ('pub_date', models.DateTimeField(verbose_name='date published')),
                 ('update', models.DateTimeField(auto_now=True)),
+                ('tags', models.ManyToManyField(related_name='articles', to='travels.Tag')),
+                ('gallery_article',
+                 models.ForeignKey(blank=True, default=1, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                   related_name='gallery_article', to='travels.Gallery')),
             ],
             options={
-                'ordering': ('-pub_date',),
+                'ordering': ('-pub_date',)
             },
         ),
         migrations.CreateModel(
@@ -39,8 +42,11 @@ class Migration(migrations.Migration):
                 ('body', models.CharField(max_length=255, verbose_name='Message')),
                 ('isAccepted', models.BooleanField(default=False)),
                 ('pub_date', models.DateTimeField(auto_now=True, verbose_name='date published')),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='travels.Article')),
-                ('author', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='author', to=settings.AUTH_USER_MODEL)),
+                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments',
+                                              to='travels.Article')),
+                ('author',
+                 models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='author',
+                                   to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('-pub_date',),
@@ -58,7 +64,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('img', models.ImageField(upload_to='')),
-                ('gallery', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='gallery', to='travels.Gallery')),
+                ('gallery',
+                 models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='gallery',
+                                   to='travels.Gallery')),
             ],
         ),
         migrations.CreateModel(
@@ -79,15 +87,5 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ('name',),
             },
-        ),
-        migrations.AddField(
-            model_name='article',
-            name='gallery_article',
-            field=models.ForeignKey(blank=True, default=1, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='gallery_article', to='travels.Gallery'),
-        ),
-        migrations.AddField(
-            model_name='article',
-            name='tags',
-            field=models.ManyToManyField(related_name='articles', to='travels.Tag'),
         ),
     ]
